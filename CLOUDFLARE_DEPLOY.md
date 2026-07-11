@@ -9,13 +9,15 @@
 
 | Campo | Valor |
 |-------|-------|
-| **Nome do projeto** | `md2pdf-premium` (ou o nome que quiser) |
+| **Nome do projeto** | `md2pdf-premium` (use sempre lowercase — a URL sera tipo `md2pdf-premium.pages.dev`) |
 | **Branch** | `main` |
 | **Diretório raiz** | (deixe em branco — o projeto já está na raiz) |
 | **Build command** | (deixe em branco — é site estático) |
 | **Build output directory** | (deixe em branco) |
 
 5. Clique em **Salvar e Implantar**
+
+> **Importante:** O nome do projeto é convertido para lowercase na URL. Se você nomear `MD2PDF-Premium`, a URL sera `md2pdf-premium.pages.dev`.
 
 Após o deploy (leva ~1 minuto), seu site estará em:
 ```
@@ -38,7 +40,7 @@ npm install -g wrangler
 # Fazer login no Cloudflare
 npx wrangler login
 
-# Fazer deploy
+# Fazer deploy (project-name em lowercase obrigatorio)
 npx wrangler pages deploy . --branch main --project-name md2pdf-premium
 ```
 
