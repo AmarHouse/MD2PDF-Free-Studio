@@ -1,6 +1,6 @@
-# MD2PDF Premium
+# MD2PDF Free Studio
 
-**Editor Markdown profissional com 50 temas premium, exportação PDF e EPUB3 — 100% no navegador.**
+**Editor Markdown profissional com 50 temas, exportação PDF e EPUB3 — 100% gratuito, 100% no navegador.**
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
@@ -11,7 +11,7 @@
 
 ## Visão Geral
 
-O MD2PDF Premium é um editor Markdown completo que roda inteiramente no navegador. Transforme seus textos em documentos PDF profissionais ou ebooks EPUB3 com 50 temas tipográficos cuidadosamente projetados.
+O MD2PDF Studio é um editor Markdown completo que roda inteiramente no navegador. Transforme seus textos em documentos PDF profissionais ou ebooks EPUB3 com 50 temas tipográficos cuidadosamente projetados.
 
 **Sem servidor. Sem instalação. Sem cadastro.**
 

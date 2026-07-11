@@ -9,7 +9,7 @@
 
 | Campo | Valor |
 |-------|-------|
-| **Nome do projeto** | `md2pdf-premium` (use sempre lowercase — a URL sera tipo `md2pdf-premium.pages.dev`) |
+| **Nome do projeto** | `md2pdf-studio` (use sempre lowercase — a URL sera tipo `md2pdf-studio.pages.dev`) |
 | **Branch** | `main` |
 | **Diretório raiz** | (deixe em branco — o projeto já está na raiz) |
 | **Build command** | (deixe em branco — é site estático) |
@@ -17,16 +17,16 @@
 
 5. Clique em **Salvar e Implantar**
 
-> **Importante:** O nome do projeto é convertido para lowercase na URL. Se você nomear `MD2PDF-Premium`, a URL sera `md2pdf-premium.pages.dev`.
+> **Importante:** O nome do projeto é convertido para lowercase na URL.
 
 Após o deploy (leva ~1 minuto), seu site estará em:
 ```
-https://md2pdf-premium.pages.dev
+https://md2pdf-studio.pages.dev
 ```
 
 E o AgenticPDF em:
 ```
-https://md2pdf-premium.pages.dev/AgenticPDF/
+https://md2pdf-studio.pages.dev/AgenticPDF/
 ```
 
 ---
@@ -41,7 +41,7 @@ npm install -g wrangler
 npx wrangler login
 
 # Fazer deploy (project-name em lowercase obrigatorio)
-npx wrangler pages deploy . --branch main --project-name md2pdf-premium
+npx wrangler pages deploy . --branch main --project-name md2pdf-studio
 ```
 
 ---
@@ -59,15 +59,15 @@ No dashboard do Cloudflare Pages:
 
 Abra no navegador:
 ```
-https://md2pdf-premium.pages.dev
-https://md2pdf-premium.pages.dev/AgenticPDF/?theme=3
-https://md2pdf-premium.pages.dev/AgenticPDF/?theme=3&lang=pt
+https://md2pdf-studio.pages.dev
+https://md2pdf-studio.pages.dev/AgenticPDF/?theme=3
+https://md2pdf-studio.pages.dev/AgenticPDF/?theme=3&lang=pt
 ```
 
 Para testar com um agente (Puppeteer/Playwright):
 ```javascript
 const page = await browser.newPage()
-await page.goto('https://md2pdf-premium.pages.dev/AgenticPDF/?theme=3')
+await page.goto('https://md2pdf-studio.pages.dev/AgenticPDF/?theme=3')
 await page.evaluate(md => window.renderMarkdown(md, 3), '# Meu Livro\n\nCapitulo 1...')
 await page.waitForFunction(() => document.body.dataset.ready === 'true')
 await page.pdf({ path: 'teste.pdf', format: 'A4', printBackground: true })

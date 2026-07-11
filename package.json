@@ -1,7 +1,7 @@
 {
-  "name": "md2pdf-premium",
+  "name": "md2pdf-studio",
   "version": "2.0.0",
-  "description": "Editor Markdown para PDF e EPUB3 com 50 temas premium",
+  "description": "Editor Markdown para PDF e EPUB3 com 50 temas — gratuito",
   "scripts": {
     "test": "npx playwright test",
     "test:headed": "npx playwright test --headed",

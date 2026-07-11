@@ -1,0 +1,49 @@
+{
+  "cookies": [
+    {
+      "name": "AEC",
+      "value": "AdJVEavUL2vrhU89xKW8f0tQzBVAiloZ18orp0cAblNTYt1QgqNJLle2Z9w",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1799342859.256698,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Secure-STRP",
+      "value": "ANmZwa3GuD0nRidItvR9qIbh_4HKy3dNnr6xXQhKHkJLt6m30sfwLKbwxBkP7HOQuu2B1GiGnPJLXdGsUcXdjUYnsbkhMg2hBVp6",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1783791159.486393,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "NID",
+      "value": "533=FzIsUXMsDrm0ooRrSn7T-7en5MY8_RrE3z0ha_4cvwMciRFf9LKJWkoNM2EHMyZ8TArAwuFrgMnBLfSl9UtcmXlbPmAHGlH-fcFs0pYA_Pqbs-0sMPAIQMP-nzAhH07x15RSw4oIMK1DDVhupE8KRcBFPXzlQAYYq8PXWJwt5MMbdEQ1k8iyxDL47nidKXltdVL9ME6bIcP693MtK7M5vKxA1z6DEmV8LTGA9pk07UJ4hPQOs0ohi_4TEehQRsH8gsBz6w-v6npEoQ",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1799602059.349412,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://www.google.com",
+      "localStorage": [
+        {
+          "name": "sb_wiz.zpc.gws-wiz.",
+          "value": "{\"0\":[[\"gabriela andrade storai desaparecida\",0,[3,143,362],{\"zf\":33,\"zp\":{\"gs_ss\":\"1\"},\"zl\":8}],[\"rafael camara f1\",46,[3,143,362],{\"lm\":[],\"zi\":\"Rafael Câmara — Automobilista brasileiro\",\"zs\":\"data:image/jpeg;base64,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\",\"zl\":8,\"zh\":\"rafael camara f1\",\"zp\":{\"gs_ssp\":\"eJzj4tVP1zc0LLbILU-vMK8yYPQSKEpMS0zNUUhOzE0sSlRIMwQAsGUKkA\"},\"zf\":33}],[\"divida publica brasil\",0,[3,143,362],{\"zl\":8,\"zf\":33,\"zp\":{\"gs_ss\":\"1\"}}],[\"call of duty black ops ps5\",0,[3,143,362],{\"zl\":8,\"zp\":{\"gs_ss\":\"1\"},\"zf\":33}],[\"the rolling stones foreign tongues\",46,[3,143,362],{\"zs\":\"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAFAAUAMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQYCBAcDAf/EADMQAAIBAwIDBQYFBQAAAAAAAAECAwAEEQUhEjFRBhMyQWEUInGhsfAjQlKBkRVicsHR/8QAGQEBAQEBAQEAAAAAAAAAAAAAAAMEAgUB/8QAJhEAAgIBAwQBBQEAAAAAAAAAAAECAxEEITESE0FRMmFxkaHwIv/aAAwDAQACEQMRAD8A7TSlKAUpSgFKUoBSlKAUpSgFKw4qFxQGdfM1HXms2No7RvOrzgE9zGQznHpVfv8AtRNIAkBW1V/z+Jx0OMfea4dkUXq09lvxRb5JEiXikdUXqxwKjLrX7KHPAzTEfpGB/Jrn2p6teiOYkmS5VDw8XvE9OflVY0/UP6vM9m1+ySg5e4md0aMhRxAL4QM53Py51HuylxsaZ6WFOO5vn0di0TtHBqcrQSx+z3GTwIWyHHoevpU3muJCe506+jivZwbeThWGbwkSADnk5Gfr0rovZftH7efZLg8c6jaVNw3+WOR+tUhZnZnN+ni49yrjyvRaaVgGFfQaqYTQuLho4XdE42VSQoPOqtcXt1rEblr9rK2Qfixxe4w65Y8hVpK7cqrOuadJZzHULJM5P4qgcx5/EHpWfUVynD/LwXo6G+mXnhnhCLOw4hZ268eN5WO7Dnkt5j5VHXiGRg0IKBzlxggE/wBo54z+1YwBkRfeMY5JvsOfL+T6bmtxLS+uciGMRpuO9m226hfh1rFXRGnM5SPRh06f5PcjHtYghWeYjPhY78B6H/Y+zA3Gkm6m722cxXiMCksQ4gcfq8mXG2KudpoFlJIz3Fy1wU5krhB8K29Q0RXhE2mYSZB4VOBIOnx6Veqypt9Dy/RO3U93Fcto+/7ggRDbWtm5vEtooXQCRW8Jwc78RJxnfY14T6zYskdpbXCRjIaMR+6vUEY+R2qI7QJM5jnFu1x3HGHgJIOSOH9iM5/amivaanb+06jLcSToyhHmfPCBuMYA4cDYY26YJrrDxlv8Hcn2bcRjn6vydF7O9pFuQlteyDvTtHN5Seh9frVnV641pGm3drcGztre4uraQlo5UTPA22VPTyOfWuo6FFqENmE1FlZh4N8sB0Y+daK5N8mXUwrx1x2flEt3YrF4QykMAQfKvfFMVQxEZFpVrblnigUOfzYyaibtUd4++MrKzcPAgPDnqceXyq04rSudPSRi8bcDHmMbGsOu087opw5RWuaT3ItkjMJQbAjAULjFY6bx7IykEHG/nW8NMlzu6AfE/wDK27WyS3AwSzAYyax06O92KU0opY/X2OpTjjYr/aLs37eDc2YVboD3lOwlHr6+v2NHSOwdvBdi+vGHflSrxw7Iw6MDzx1q78NfcV7PSs5OXdNwUG9kaltZw20YjgiWNR5KK9wlemKYr6SPtKUoBSlKAUpSgFKUoBSlKA//2Q==\",\"zf\":33,\"zp\":{\"gs_ssp\":\"eJzj4tVP1zc0zMtIqYovL0gzYPRSKslIVSjKz8nJzEtXKC7Jz0stVkjLL0rNTM9TKMnPSy9NLQYAyNgSfw\"},\"zl\":8,\"zh\":\"Foreign Tongues\",\"lm\":[],\"zi\":\"Álbum de The Rolling Stones\"}],[\"ciclista morre na serra do japi\",0,[3,143,362],{\"zl\":8,\"zp\":{\"gs_ss\":\"1\"},\"zf\":33}],[\"wesley al nassr\",46,[3,143,362],{\"zp\":{\"gs_ssp\":\"eJzj4tVP1zc0LK40izcysow3YPTiL08tzkmtVEjMUchLLC4uAgCZjQoT\"},\"zf\":33,\"zl\":8,\"zh\":\"wesley al nassr\",\"zs\":\"data:image/jpeg;base64,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\",\"zi\":\"Wesley Gassova Ribeiro Teixeira — Jogador de futebol brasileiro\",\"lm\":[]}],[\"geely ex5\",0,[3,143,362],{\"zl\":8,\"zf\":33,\"zp\":{\"gs_ss\":\"1\"}}],[\"festival comida italiana\",0,[3,143,362],{\"zl\":8,\"zf\":33,\"zp\":{\"gs_ss\":\"1\"}}],[\"amazon alexa\",0,[3,143,362],{\"zl\":8,\"zf\":33,\"zp\":{\"gs_ss\":\"1\"}}]],\"1\":{\"av\":\"11382637975100044503\",\"ag\":{\"a\":{\"8\":[\"Pesquisas em alta\"]}}}}"
+        },
+        {
+          "name": "sb_wiz.qc",
+          "value": "1"
+        }
+      ]
+    }
+  ]
+}

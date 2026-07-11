@@ -158,8 +158,8 @@ const EPUBGenerator = {
                     <dc:identifier id="uid">${cleanId}</dc:identifier>
                     <dc:title>${bookTitle}</dc:title>
                     <dc:language>pt-BR</dc:language>
-                    <dc:creator>MD2PDF Premium</dc:creator>
-                    <dc:publisher>MD2PDF Premium</dc:publisher>
+                    <dc:creator>MD2PDF Studio</dc:creator>
+                    <dc:publisher>MD2PDF Studio</dc:publisher>
                     <dc:date>${new Date().toISOString().split('T')[0]}</dc:date>
                     <meta property="dcterms:modified">${new Date().toISOString().split('.')[0]}Z</meta>
                 </metadata>

@@ -178,10 +178,10 @@ const PDFGenerator = {
                 <head>
                     <meta charset="UTF-8">
                     <title>${bookTitle}</title>
-                    <meta name="author" content="MD2PDF Premium">
+                    <meta name="author" content="MD2PDF Studio">
                     <meta name="subject" content="${bookTitle}">
-                    <meta name="creator" content="MD2PDF Premium">
-                    <meta name="producer" content="MD2PDF Premium">
+                    <meta name="creator" content="MD2PDF Studio">
+                    <meta name="producer" content="MD2PDF Studio">
                     ${fontLink}
                     <link rel="preconnect" href="https://fonts.googleapis.com">
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

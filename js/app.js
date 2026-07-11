@@ -286,7 +286,7 @@ const App = {
     },
 
     updateWelcome() {
-        this.dom.input.value = `# Bem-vindo ao MD2PDF Premium
+        this.dom.input.value = `# Bem-vindo ao MD2PDF Studio
 
 > Seu editor Markdown profissional com 50 temas, exportação PDF e EPUB3.
 
