@@ -1,193 +1,138 @@
 # MD2PDF Free Studio
 
-**Editor Markdown profissional com 50 temas, exportação PDF e EPUB3 — 100% gratuito, 100% no navegador.**
+> **Free Markdown to PDF & EPUB converter** — 50 themes, PWA offline, AI agent-ready.  
+> Zero server, zero cost, zero auth. Runs 100% in your browser.
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=flat&logo=pwa&logoColor=white)
-
----
-
-## Visão Geral
-
-O MD2PDF Studio é um editor Markdown completo que roda inteiramente no navegador. Transforme seus textos em documentos PDF profissionais ou ebooks EPUB3 com 50 temas tipográficos cuidadosamente projetados.
-
-**Sem servidor. Sem instalação. Sem cadastro.**
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/AmarHouse/MD2PDF-Free-Studio?style=social)](https://github.com/AmarHouse/MD2PDF-Free-Studio)
+[![PWA](https://img.shields.io/badge/PWA-5A0FC8?logo=pwa&logoColor=white)](https://md2pdf-free-studio.pages.dev/)
+[![Cloudflare Pages](https://img.shields.io/badge/Deployed-Cloudflare%20Pages-F38020?logo=cloudflare&logoColor=white)](https://md2pdf-free-studio.pages.dev/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 ---
 
-## Funcionalidades
+## 🚀 Try It Now
 
-### Editor
-- Editor Markdown com preview em tempo real
-- Barra de ferramentas completa (títulos, negrito, itálico, listas, tabelas, código)
-- Busca e substituição com expressão regular
-- Inserção de imagens por URL e upload (ImgBB)
-- Suporte a drag & drop de arquivos `.md` e imagens
-- Auto-save com gerenciamento de projetos e versionamento
-- Contagem de palavras, caracteres, linhas e tempo de leitura
+**No install, no signup, no cost.** Open in any browser:
 
-### 50 Temas Premium
-Temas organizados em 7 categorias, cada um com identidade visual única:
-
-| Categoria | Quantidade | Estilo |
-|-----------|:----------:|--------|
-| Clássicos | 9 | Tipografia tradicional, serifadas |
-| Modernos | 8 | Limpeza, sans-serif, contemporâneo |
-| Técnicos | 8 | Clareza para documentação e manuais |
-| Criativos | 6 | Originalidade e expressão visual |
-| Elegantes | 6 | Sofisticação e graça |
-| Educacionais | 6 | Clareza para aprendizado |
-| Tecnológicos | 7 | Futurismo, neon, terminal |
-
-### Exportação
-- **PDF** — Configurações de página (A4, A5, Carta, Ofício, Kindle), margens orientação, e marca d'água personalizada
-- **EPUB3** — Geração de ebook completo com navegação, imagens externas incorporadas e sumário automático
-
-### Editor Visual de Temas
-- Crie temas personalizados com editor de CSS em tempo real
-- Selecione fontes, cores e estilos
-- Preview instantâneo
-
-### PWA (Progressive Web App)
-- Funciona 100% offline após primeiro acesso
-- Service Worker com cache inteligente
-- Instalável em desktop e mobile
-
-### Internacionalização
-- Português (PT-BR)
-- English (EN)
-- Español (ES)
-
-### Atalhos de Teclado
-
-| Atalho | Ação |
-|--------|------|
-| `Ctrl+B` | Negrito |
-| `Ctrl+I` | Itálico |
-| `Ctrl+K` | Link |
-| `Ctrl+Shift+K` | Tachado |
-| `Ctrl+Z` | Desfazer |
-| `Ctrl+Y` | Refazer |
-| `Ctrl+S` | Salvar |
-| `Ctrl+F` | Buscar |
-| `Ctrl+H` | Buscar e Substituir |
-| `Ctrl+Shift+S` | Gerenciar Projetos |
-| `Ctrl+O` | Abrir arquivo |
-| `Tab` | Indentar |
+### 👉 [md2pdf-free-studio.pages.dev](https://md2pdf-free-studio.pages.dev/)
 
 ---
 
-## Estrutura do Projeto
+## ✨ Features
+
+| | Feature | Detail |
+|---|---------|--------|
+| 🎨 | **50 Typography Themes** | Classic, modern, elegant, technical, creative, dark |
+| 📄 | **PDF Export** | Custom margins, page size, orientation, watermarks |
+| 📚 | **EPUB3 Export** | Reflowable ebooks with external images |
+| 🖼️ | **Visual Theme Editor** | Create & customize your own themes |
+| 📝 | **Markdown Editor** | Live preview, toolbar, keyboard shortcuts |
+| 🔍 | **Find & Replace** | Regex support |
+| 💾 | **Auto-Save** | Projects persist in your browser |
+| 🌐 | **Offline PWA** | Works without internet after first load |
+| 🌍 | **Multi-language** | PT-BR, EN, ES |
+| 🤖 | **AI Agent Ready** | AgenticPDF — agents discover & use it autonomously |
+
+---
+
+## 🤖 For AI Agents
+
+MD2PDF Free Studio includes **AgenticPDF**, a self-discovering endpoint that any AI agent can use to generate PDFs autonomously.
+
+**How agents discover it:**
 
 ```
-MD2EPUB-Premium/
-├── index.html          # Página principal
-├── manifest.json       # PWA manifest
-├── sw.js               # Service Worker
-├── css/
-│   ├── main.css        # Estilos gerais e layout
-│   ├── editor.css      # Estilos do editor
-│   ├── preview.css     # Estilos do preview
-│   ├── modals.css      # Estilos dos modais
-│   ├── print.css       # Estilos de impressão
-│   └── pix.css         # Estilos do modal PIX
-├── js/
-│   ├── app.js          # Módulo principal
-│   ├── editor.js       # Lógica do editor
-│   ├── preview.js      # Renderização do preview
-│   ├── themes.js       # 50 temas premium
-│   ├── theme-editor.js # Editor visual de temas
-│   ├── storage.js      # Persistência localStorage
-│   ├── i18n.js         # Internacionalização
-│   ├── stats.js        # Estatísticas e contadores
-│   ├── find-replace.js # Busca e substituição
-│   ├── image-manager.js# Gerenciamento de imagens
-│   ├── templates.js    # Templates editoriais
-│   ├── pdf-generator.js# Exportação PDF
-│   ├── epub-generator.js# Exportação EPUB3
-│   └── pix.js          # Modal de doação PIX
-└── .gitignore
+1. Fetch https://md2pdf-free-studio.pages.dev/AgenticPDF/
+2. Read the <script type="application/agent+json"> manifest
+3. Call window.renderMarkdown(md, themeId)
+4. Capture with page.pdf()
 ```
 
----
+### Agent Workflow (Puppeteer/Playwright)
 
-## Deploy no CloudFlare Pages
+```javascript
+const page = await browser.newPage()
+await page.goto('https://md2pdf-free-studio.pages.dev/AgenticPDF/?theme=3')
 
-### Via GitHub (Recomendado)
+// Inject any markdown — unlimited size
+await page.evaluate(md => window.renderMarkdown(md, 3), markdownContent)
 
-1. Crie um repositório no GitHub
-2. Faça push do código:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git remote add origin https://github.com/SEU-USER/MD2EPUB-Premium.git
-   git push -u origin main
-   ```
-3. No [CloudFlare Pages](https://dash.cloudflare.com/), crie um novo projeto
-4. Conecte ao repositório GitHub
-5. **Build settings:**
-   - Build command: *(vazio)*
-   - Build output directory: `/` (raiz)
-6. Clique em "Save and Deploy"
+// Wait for fonts and rendering
+await page.waitForFunction(() => document.body.dataset.ready === 'true')
 
-> **Nota:** O projeto é 100% estático — não há build step necessário. O `.gitignore` exclui automaticamente `node_modules/` e arquivos de teste.
-
-### Via Direct Upload
-
-Se preferir upload direto sem GitHub, copie apenas estes arquivos para uma pasta e faça upload:
-```
-index.html
-manifest.json
-sw.js
-css/
-js/
+// Capture PDF
+await page.pdf({
+  path: 'output.pdf',
+  format: 'A4',
+  printBackground: true,
+  preferCSSPageSize: true
+})
 ```
 
----
+### Bilingual Support
 
-## Tecnologias Utilizadas
+```
+?lang=en → English (default)
+?lang=pt → Portuguese
+```
 
-| Biblioteca | Uso |
-|------------|-----|
-| [Marked.js](https://marked.js.org/) | Parser Markdown → HTML |
-| [JSZip](https://stuk.github.io/jszip/) | Geração de arquivos EPUB |
-| [FileSaver.js](https://github.com/nicnl31/FileSaver.js) | Download de arquivos |
-| [Font Awesome](https://fontawesome.com/) | Ícones da interface |
-| [Google Fonts](https://fonts.google.com/) | Tipografia dos temas |
+### Agent Discovery Endpoints
 
-Todas as dependências são carregadas via CDN — sem `npm install` necessário para produção.
-
----
-
-## SEO e Metadados
-
-O `index.html` inclui:
-- OpenGraph e Twitter Card para compartilhamento em redes sociais
-- JSON-LD (Schema.org) para rich snippets
-- Hreflang para SEO multilíngue
-- Meta tags PWA para instalação em mobile
+| Endpoint | Description |
+|----------|-------------|
+| `GET /AgenticPDF/` | Auto-discovery manifest |
+| `GET /AgenticPDF/config.json` | System config & terms |
+| `GET /AgenticPDF/themes.json` | 50 themes list |
+| `GET /AgenticPDF/?md=BASE64(...)&theme=N` | URL-param rendering |
 
 ---
 
-## Permissões
+## 🎨 Theme Gallery
 
-| Recurso | Necessário |
-|---------|-----------|
-| Clipboard | Copiar payload PIX |
-| Service Worker | Cache offline |
-| Pop-up | Geração de PDF (via impressão) |
+| Group | Themes | Count |
+|-------|--------|-------|
+| **Classic** | Garamond, Bodoni, Playfair, Baskerville, Lora, Crimson, Spectral | 9 |
+| **Modern** | Inter, Raleway, Poppins, Lato, Josefin, Montserrat | 8 |
+| **Technical** | Tech Manual, Code Guide, University Thesis, Medical Journal | 8 |
+| **Creative** | Vintage Poster, Pastel Dreams, Art Deco, Handwritten | 6 |
+| **Elegant** | Gold & Black, Royal Purple, Platinum, Midnight Rose | 6 |
+| **Educational** | Classroom, Science Lab, History Book, Creative Writing | 6 |
+| **Tech** | Cyberpunk, Matrix, Hologram, Terminal, Quantum, AI Neural | 7 |
+| | **Total** | **50** |
 
 ---
 
-## Créditos
+## 🚀 Deploy Your Own
 
-Desenvolvido por **Pedro Luz** — [resende.com.br/lp/pedroluz](https://resende.com.br/lp/pedroluz)
+Deploy to Cloudflare Pages in 1 click — it's free:
+
+1. Fork this repo
+2. Go to [dash.cloudflare.com](https://dash.cloudflare.com/) → Workers & Pages → Pages
+3. Connect your fork → **Save and Deploy**
+
+No build command needed. Zero configuration.
 
 ---
 
-## Licença
+## 🛠️ Tech Stack
 
-Uso livre. Se este projeto te ajudou, considere oferecer um cafezinho via PIX dentro do app.
+- **HTML/CSS/JS** — No frameworks, no build step
+- **[marked.js](https://marked.js.org/)** — Markdown parsing
+- **Google Fonts** — 40+ font families
+- **Cloudflare Pages** — Global CDN hosting
+- **PWA** — Service worker for offline support
+
+---
+
+## 📜 License
+
+MIT — Free for any use, including commercial and agentic.
+
+---
+
+## ⭐ Support
+
+If you find this useful, **star the repo** — it helps others discover it.
+
+[![GitHub stars](https://img.shields.io/github/stars/AmarHouse/MD2PDF-Free-Studio?style=social)](https://github.com/AmarHouse/MD2PDF-Free-Studio)
