@@ -99,6 +99,29 @@ header {
     border: 1px solid var(--border);
 }
 
+.color-picker-wrap {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    transition: border var(--transition);
+}
+.color-picker-wrap:hover {
+    border-color: var(--border);
+}
+#accent-color-picker {
+    width: 20px;
+    height: 20px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: none;
+    border-radius: 3px;
+}
+
 .nav-btn {
     background: white;
     border: 1px solid var(--border);

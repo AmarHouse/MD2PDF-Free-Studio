@@ -51,6 +51,7 @@ const App = {
         ThemeManager.init();
         AutoSave.init();
         this.populateThemes();
+        this.loadAccentColor();
         this.bindEvents();
         this.setupResizeHandle();
         Preview.init();
@@ -115,8 +116,22 @@ const App = {
 
         this.dom.select.addEventListener('change', (e) => {
             this.currentIndex = parseInt(e.target.value);
+            this.loadAccentColor();
             this.updatePreview();
         });
+
+        const colorPicker = document.getElementById('accent-color-picker');
+        if (colorPicker) {
+            colorPicker.addEventListener('input', (e) => {
+                const color = e.target.value;
+                try {
+                    const s = JSON.parse(localStorage.getItem('md2pdf_settings') || '{}');
+                    s.accentColor = color;
+                    localStorage.setItem('md2pdf_settings', JSON.stringify(s));
+                } catch {}
+                this.updatePreview();
+            });
+        }
 
         this.dom.btnPrev.addEventListener('click', () => this.cycleTheme(-1));
         this.dom.btnNext.addEventListener('click', () => this.cycleTheme(1));
@@ -283,6 +298,18 @@ const App = {
             else if (text.includes('FACA AGORA') || text.includes('FAÇA AGORA') || text.includes('Exercicio') || text.includes('Exercício')) bq.classList.add('exercise-block');
         });
         return doc.body.innerHTML;
+    },
+
+    loadAccentColor() {
+        const theme = ThemeManager.get(this.currentIndex);
+        const colorPicker = document.getElementById('accent-color-picker');
+        if (!colorPicker) return;
+        try {
+            const s = JSON.parse(localStorage.getItem('md2pdf_settings') || '{}');
+            colorPicker.value = s.accentColor || theme.color || '#2d5a27';
+        } catch {
+            colorPicker.value = theme.color || '#2d5a27';
+        }
     },
 
     updateWelcome() {

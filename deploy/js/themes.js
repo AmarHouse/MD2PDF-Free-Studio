@@ -3541,8 +3541,16 @@ const ThemeManager = {
         `;
     },
 
+    getColorOverride() {
+        try {
+            const s = JSON.parse(localStorage.getItem('md2pdf_settings') || '{}');
+            return s.accentColor || null;
+        } catch { return null; }
+    },
+
     buildThemeCSS(theme) {
-        const accentColor = theme.color || '#333';
+        const colorOverride = this.getColorOverride();
+        const accentColor = colorOverride || theme.color || '#333';
         const themeBodyCSS = theme.css
             .replace(/padding:\s*[^;]+;?/gi, '')
             .replace(/margin:\s*[^;]+;?/gi, '')
@@ -3568,7 +3576,7 @@ const ThemeManager = {
             #preview-content h1, #preview-content h2, #preview-content h3,
             #preview-content h4, #preview-content h5, #preview-content h6 {
                 font-family: ${theme.fonts.head};
-                color: ${theme.color || '#1a1a1a'};
+                color: ${colorOverride || theme.color || '#1a1a1a'};
                 text-rendering: optimizeLegibility;
                 font-kerning: normal;
                 font-feature-settings: "liga" 1, "kern" 1, "dlig" 1;
