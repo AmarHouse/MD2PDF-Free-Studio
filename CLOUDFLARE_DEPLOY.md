@@ -9,11 +9,11 @@
 
 | Campo | Valor |
 |-------|-------|
-| **Nome do projeto** | `md2pdf-studio` (use sempre lowercase — a URL sera tipo `md2pdf-studio.pages.dev`) |
+| **Nome do projeto** | `md2pdf-free-studio` |
 | **Branch** | `main` |
-| **Diretório raiz** | (deixe em branco — o projeto já está na raiz) |
-| **Build command** | (deixe em branco — é site estático) |
-| **Build output directory** | `deploy` (obrigatório — todo o conteudo público está nesta pasta) |
+| **Diretório raiz** | (deixe em branco) |
+| **Build command** | (deixe em branco) |
+| **Build output directory** | `deploy` (obrigatório — só esta pasta vai pro ar) |
 
 5. Clique em **Salvar e Implantar**
 
@@ -21,12 +21,12 @@
 
 Após o deploy (leva ~1 minuto), seu site estará em:
 ```
-https://md2pdf-studio.pages.dev
+https://md2pdf-free-studio.pages.dev
 ```
 
 E o AgenticPDF em:
 ```
-https://md2pdf-studio.pages.dev/AgenticPDF/
+https://md2pdf-free-studio.pages.dev/AgenticPDF/
 ```
 
 ---
