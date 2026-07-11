@@ -25,6 +25,7 @@ const Preview = {
         const editorInput = document.getElementById('markdown-input');
         const previewPane = document.querySelector('.preview-pane');
         if (!editorInput || !previewPane) return;
+        if (window.innerWidth <= 480) return; // desliga sync em modo tab mobile
 
         let ticking = false;
 

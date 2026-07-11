@@ -60,6 +60,8 @@ const App = {
         ImageManager.init();
         Stats.init?.();
 
+        this.initMobileTabs();
+
         const restored = AutoSave.restore();
         if (!restored) {
             this.updateWelcome();
@@ -434,6 +436,42 @@ Clique no ícone de pasta na barra de ferramentas ou pressione **Ctrl+Shift+S** 
 
     updatePreview() {
         Preview.update();
+    },
+
+    initMobileTabs() {
+        const tabs = document.getElementById('mobile-tabs');
+        if (!tabs) return;
+        tabs.querySelectorAll('.mobile-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+                const editor = document.querySelector('.editor-pane');
+                const preview = document.querySelector('.preview-pane');
+                tabs.querySelectorAll('.mobile-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                if (target === 'editor') {
+                    editor.classList.remove('mobile-hidden');
+                    editor.classList.add('mobile-visible');
+                    preview.classList.remove('mobile-visible');
+                    preview.classList.add('mobile-hidden');
+                } else {
+                    preview.classList.remove('mobile-hidden');
+                    preview.classList.add('mobile-visible');
+                    editor.classList.remove('mobile-visible');
+                    editor.classList.add('mobile-hidden');
+                }
+            });
+        });
+        // Desktop mode: ensure both visible
+        const checkDesktop = () => {
+            if (window.innerWidth > 480) {
+                const editor = document.querySelector('.editor-pane');
+                const preview = document.querySelector('.preview-pane');
+                if (editor) { editor.classList.remove('mobile-hidden', 'mobile-visible'); }
+                if (preview) { preview.classList.remove('mobile-hidden', 'mobile-visible'); }
+            }
+        };
+        window.addEventListener('resize', checkDesktop);
+        checkDesktop();
     },
 
     setupResizeHandle() {
