@@ -1,7 +1,7 @@
 {
-    "name": "MD2PDF Studio",
+    "name": "MD2PDF Free Studio",
     "short_name": "MD2PDF",
-    "description": "Editor Markdown profissional com 50 temas premium, exportação PDF e EPUB3",
+    "description": "Editor Markdown gratuito com 50 temas, exportacao PDF e EPUB3",
     "start_url": "./index.html",
     "scope": "./",
     "display": "standalone",
