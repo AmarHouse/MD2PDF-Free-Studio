@@ -1,0 +1,364 @@
+/* ============================================
+   PIX.CSS - Modal de Doacao PIX - Design Elite
+   Cores neutras do sistema, sem verde
+   ============================================ */
+
+/* Overlay */
+.pix-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+.pix-modal-overlay.open { display: flex; }
+
+/* Modal */
+.pix-modal {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    max-width: 360px;
+    width: 92%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: pixIn 0.25s ease;
+}
+@keyframes pixIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header - escuro como o sistema */
+.pix-modal-header {
+    background: #1a1a1a;
+    color: white;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.pix-modal-header h3 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+/* Close */
+.pix-modal-close {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: rgba(255,255,255,0.7);
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+.pix-modal-close:hover {
+    background: rgba(255,255,255,0.2);
+    color: white;
+}
+
+/* Body */
+.pix-modal-body {
+    padding: 16px 18px 18px;
+}
+
+/* Descricao */
+.pix-modal-desc {
+    font-size: 0.82rem;
+    color: #334155;
+    margin: 0 0 4px;
+    line-height: 1.45;
+}
+
+/* Badge seguranca */
+.pix-modal-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    color: #495057;
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 16px;
+    margin-bottom: 12px;
+}
+
+/* Passos */
+.pix-modal-steps {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin: 0 0 14px;
+    padding: 8px 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #f1f3f5;
+}
+.pix-modal-steps span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.65rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+.pix-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    color: white;
+    font-size: 0.55rem;
+    font-weight: 700;
+}
+.pix-step-sep {
+    color: #dee2e6;
+    font-size: 0.55rem;
+}
+
+/* Valor */
+.pix-value-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #495057;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    text-align: left;
+}
+.pix-values {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+.pix-value-btn {
+    flex: 1;
+    padding: 8px 6px;
+    border-radius: 8px;
+    border: 1.5px solid #dee2e6;
+    background: white;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 600;
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+.pix-value-btn:hover {
+    border-color: #1a1a1a;
+    color: #1a1a1a;
+    background: #f8f9fa;
+}
+.pix-value-btn.active {
+    background: #1a1a1a;
+    color: white;
+    border-color: #1a1a1a;
+}
+
+/* Valor customizado */
+.pix-custom-value {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.pix-custom-value span {
+    color: #6c757d;
+    font-weight: 500;
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+.pix-custom-value input {
+    flex: 1;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1.5px solid #dee2e6;
+    background: white;
+    color: #1a1a1a;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
+}
+.pix-custom-value input:focus {
+    outline: none;
+    border-color: #1a1a1a;
+}
+.pix-custom-value input::placeholder {
+    color: #adb5bd;
+    font-weight: 400;
+}
+
+/* Mensagem */
+.pix-msg-field {
+    margin-top: 10px;
+}
+.pix-msg-field label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.pix-msg-field input {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1.5px solid #dee2e6;
+    background: white;
+    color: #1a1a1a;
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s;
+}
+.pix-msg-field input:focus {
+    outline: none;
+    border-color: #1a1a1a;
+}
+.pix-msg-field input::placeholder {
+    color: #adb5bd;
+}
+
+/* Divisor */
+.pix-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0;
+    color: #ced4da;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+.pix-divider::before,
+.pix-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e9ecef;
+}
+
+/* QR Code */
+.pix-qr-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+.pix-qr-wrap img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    border: 1.5px solid #f1f3f5;
+    padding: 4px;
+    background: white;
+}
+
+/* Instrucao QR */
+.pix-qr-hint {
+    font-size: 0.68rem;
+    color: #6c757d;
+    margin: 4px 0 12px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* Botao copiar */
+.pix-copy-btn {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    background: #1a1a1a;
+    color: white;
+    transition: all 0.2s;
+    font-weight: 600;
+    font-size: 0.82rem;
+    font-family: 'Inter', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.pix-copy-btn:hover {
+    background: #333;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+/* Feedback copiado */
+.pix-copy-feedback {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    color: #495057;
+    font-size: 0.72rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+.pix-copy-feedback.show { display: flex; }
+.pix-copy-feedback i {
+    color: #198754;
+    flex-shrink: 0;
+}
+
+/* Payload */
+.pix-payload-text {
+    margin-top: 8px;
+    font-size: 0.55rem;
+    color: #ced4da;
+    word-break: break-all;
+    max-height: 24px;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    text-align: left;
+    background: #f8f9fa;
+    border: 1px solid #f1f3f5;
+}
+.pix-payload-text:hover {
+    color: #6c757d;
+}
+
+/* Responsivo */
+@media (max-width: 400px) {
+    .pix-modal { width: 96%; border-radius: 10px; }
+    .pix-modal-body { padding: 14px 14px 16px; }
+    .pix-qr-wrap img { width: 130px; height: 130px; }
+    .pix-value-btn { padding: 6px 4px; font-size: 0.75rem; }
+    .pix-modal-steps { flex-direction: column; align-items: center; gap: 3px; padding: 6px; }
+    .pix-step-sep { display: none; }
+}

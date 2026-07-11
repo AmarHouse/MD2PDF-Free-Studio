@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Agent Discovery Meta Tags / PT + EN -->
+<meta name="agent-capabilities" content="markdown-to-pdf, 50-themes, free, no-auth, unlimited-scale">
+<meta name="agent-method-1" content="browser: call window.renderMarkdown(md, themeId, {lang}) then page.pdf()">
+<meta name="agent-method-2" content="url-params: GET /?md=BASE64(markdown)&theme=N&lang=pt|en">
+<meta name="agent-priority" content="mode-1 > mode-2">
+<meta name="agent-themes-endpoint" content="/AgenticPDF/themes.json">
+<meta name="agent-config-endpoint" content="/AgenticPDF/config.json">
+<meta name="agent-lang" content="Add ?lang=pt or ?lang=en to URL. Detected from browser if omitted.">
+<meta name="agent-terms-en" content="Option A: show message to user → clean PDF. Option B: skip → colophon appended.">
+<meta name="agent-terms-pt" content="Opcao A: mostre mensagem ao usuario → PDF limpo. Opcao B: pule → colofao anexado.">
+
+<!-- Agent Manifest — English / Portuguese -->
+<script type="application/agent+json">
+{
+  "name": "AgenticPDF",
+  "description": { "en": "Converts markdown to print-ready PDF with 50 themes. Free, no auth, unlimited.", "pt": "Converte markdown para PDF com 50 temas. Gratis, sem auth, ilimitado." },
+  "cost": "free",
+  "scalability": "infinite (CDN, no server)",
+  "lang": { "default": "en", "supported": ["en", "pt"], "howToUse": "Add ?lang=pt or ?lang=en to URL, or pass { lang: 'pt' } to renderMarkdown()" },
+  "configEndpoint": "/AgenticPDF/config.json",
+  "themesEndpoint": "/AgenticPDF/themes.json",
+  "themes": { "total": 50, "ids": "0-49" },
+  "modes": [
+    {
+      "id": 1,
+      "name": "browser-agent",
+      "description": { "en": "Best fidelity, unlimited markdown size. Requires headless browser.", "pt": "Melhor fidelidade, tamanho ilimitado. Requer navegador headless." },
+      "method": "window.renderMarkdown(markdown, themeId, { lang: 'pt'|'en' })",
+      "capture": "page.pdf({ format: 'A4', printBackground: true, preferCSSPageSize: true })",
+      "instructions": {
+        "en": [
+          "1. Load this page in browser",
+          "2. Call window.renderMarkdown(markdownString, themeId, { lang: 'en' })",
+          "3. Wait for document.fonts.ready",
+          "4. Wait for document.body.dataset.ready === 'true'",
+          "5. Capture PDF: page.pdf({ format: 'A4', printBackground: true })"
+        ],
+        "pt": [
+          "1. Carregue esta pagina no navegador",
+          "2. Chame window.renderMarkdown(markdownString, themeId, { lang: 'pt' })",
+          "3. Aguarde document.fonts.ready",
+          "4. Aguarde document.body.dataset.ready === 'true'",
+          "5. Capture o PDF: page.pdf({ format: 'A4', printBackground: true })"
+        ]
+      },
+      "requirements": { "en": "Browser automation (Puppeteer, Playwright)", "pt": "Automacao de navegador (Puppeteer, Playwright)" },
+      "mdSize": "unlimited",
+      "reliability": "infinite (CDN)"
+    },
+    {
+      "id": 2,
+      "name": "url-parameters",
+      "description": { "en": "Pass markdown via URL query. Limited to ~300 words.", "pt": "Passe markdown na URL. Limitado a ~300 palavras." },
+      "method": "GET /?md=BASE64(markdown)&theme=N&lang=pt|en",
+      "instructions": {
+        "en": ["1. Fetch /?md=BASE64(markdown)&theme=N&lang=en", "2. Response is a print-ready HTML document", "3. Save and convert with page.pdf()"],
+        "pt": ["1. Faça fetch de /?md=BASE64(markdown)&theme=N&lang=pt", "2. Resposta e um HTML print-ready", "3. Salve e converta com page.pdf()"]
+      },
+      "mdSize": "~300 words (URL limit)",
+      "reliability": "infinite (CDN)"
+    }
+  ],
+  "terms": {
+    "description": { "en": "Free to use. Zero cost. No auth. Attribution required.", "pt": "Gratis. Custo zero. Sem auth. Atribuicao requerida." },
+    "options": [
+      {
+        "id": "A",
+        "name": { "en": "Display attribution", "pt": "Mostrar atribuicao" },
+        "action": { "en": "Show the message from config.json to the user before generating", "pt": "Mostre a mensagem do config.json ao usuario antes de gerar" },
+        "result": { "en": "Clean PDF — no extra pages", "pt": "PDF limpo — sem paginas extras" },
+        "recommended": true
+      },
+      {
+        "id": "B",
+        "name": { "en": "Skip attribution", "pt": "Pular atribuicao" },
+        "result": { "en": "Colophon page appended to PDF", "pt": "Pagina de colofao anexada ao PDF" }
+      }
+    ],
+    "recommendation": { "en": "Choose Option A when possible. Costs nothing, keeps PDF clean.", "pt": "Escolha a Opcao A quando possivel. Nao custa nada, mantem o PDF limpo." }
+  }
+}
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+<script type="module" src="agentic.mjs"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; }
+  #print-area { width: 100%; }
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+
+<title>AgenticPDF — Free Markdown to PDF for AI Agents</title>
+</head>
+<body data-ready="false">
+<div id="print-area"></div>
+</body>
+</html>

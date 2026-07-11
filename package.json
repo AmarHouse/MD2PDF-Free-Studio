@@ -1,0 +1,14 @@
+{
+  "name": "md2pdf-premium",
+  "version": "2.0.0",
+  "description": "Editor Markdown para PDF e EPUB3 com 50 temas premium",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "serve": "^14.2.0"
+  }
+}

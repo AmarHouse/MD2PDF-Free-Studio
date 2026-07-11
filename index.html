@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- SEO Básico -->
+    <title>MD2PDF Premium — Editor Markdown para PDF e EPUB3 | 50 Temas Profissionais</title>
+    <meta name="description" content="Editor Markdown profissional gratuito com 50 temas premium, exportação PDF com marca d'água, EPUB3 com imagens externas, templates, editor visual de temas e atalhos de teclado. Funciona offline como PWA.">
+    <meta name="keywords" content="markdown editor, pdf export, epub generator, markdown to pdf, markdown to epub, ebook creator, editor markdown, gerador pdf, gerador epub, ebook editor">
+    <meta name="author" content="MD2PDF Premium">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://md2pdf.example.com/">
+
+    <!-- SEO Internacional (Hreflang) -->
+    <link rel="alternate" hreflang="pt-BR" href="https://md2pdf.example.com/?lang=pt-BR">
+    <link rel="alternate" hreflang="en" href="https://md2pdf.example.com/?lang=en">
+    <link rel="alternate" hreflang="es" href="https://md2pdf.example.com/?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://md2pdf.example.com/">
+
+    <!-- OpenGraph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://md2pdf.example.com/">
+    <meta property="og:title" content="MD2PDF Premium — Editor Markdown para PDF e EPUB3">
+    <meta property="og:description" content="Editor Markdown profissional com 50 temas premium, exportação PDF e EPUB3, templates, editor de temas e funcionamento offline.">
+    <meta property="og:image" content="https://md2pdf.example.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="MD2PDF Premium Studio - Editor Markdown">
+    <meta property="og:site_name" content="MD2PDF Premium">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="es_ES">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://md2pdf.example.com/">
+    <meta name="twitter:title" content="MD2PDF Premium — Editor Markdown para PDF e EPUB3">
+    <meta name="twitter:description" content="Editor Markdown profissional com 50 temas premium, exportação PDF e EPUB3. Funciona offline.">
+    <meta name="twitter:image" content="https://md2pdf.example.com/og-image.png">
+    <meta name="twitter:image:alt" content="MD2PDF Premium Studio">
+
+    <!-- PWA / Mobile -->
+    <meta name="theme-color" content="#2d5a27" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MD2PDF">
+    <meta name="application-name" content="MD2PDF Premium">
+    <meta name="msapplication-TileColor" content="#2d5a27">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Preconnect para performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts - todas as famílias usadas nos 50 temas -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Poppins:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700;800;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Fira+Code:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Bebas+Neue:wght@400&family=Oswald:wght@200;300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" as="style">
+
+    <!-- Preload do CSS crítico -->
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="css/editor.css" as="style">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "MD2PDF Premium Studio",
+        "alternateName": ["MD2PDF", "Markdown to EPUB", "Markdown to PDF"],
+        "url": "https://md2pdf.example.com/",
+        "description": "Editor Markdown profissional gratuito com 50 temas premium, exportação PDF com marca d'água, EPUB3 com imagens externas, templates e editor visual de temas.",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        },
+        "featureList": [
+            "50 temas premium profissionais",
+            "Exportação PDF com configurações de página e marca d'água",
+            "Exportação EPUB3 com imagens externas",
+            "8 templates prontos",
+            "Editor visual de temas personalizados",
+            "Busca e substituição com expressão regular",
+            "Auto-save e gerenciamento de projetos",
+            "Suporte a 3 idiomas (PT-BR, EN, ES)",
+            "Funcionamento offline como PWA",
+            "Atalhos de teclado para produtividade",
+            "Inserção de imagens por URL e upload",
+            "Contagem de palavras e tempo de leitura"
+        ],
+        "inLanguage": ["pt-BR", "en", "es"],
+        "isAccessibleForFree": true,
+        "browserRequirements": "Requer navegador moderno com suporte a JavaScript e Service Workers",
+        "softwareVersion": "2.0",
+        "dateModified": "2026-07-03"
+    }
+    </script>
+
+    <!-- WebMCP (Model Context Protocol) -->
+    <meta name="mcp-server" content="https://md2pdf.example.com/mcp">
+    <meta name="mcp-capabilities" content="markdown-convert,theme-apply,epub-generate,pdf-generate">
+    <script type="application/mcp+json">
+    {
+        "name": "MD2PDF Premium",
+        "version": "2.0",
+        "description": "Conversor Markdown para PDF e EPUB3 com 50 temas premium",
+        "endpoints": {
+            "convert": {
+                "method": "POST",
+                "path": "/api/convert",
+                "description": "Converte Markdown para PDF ou EPUB",
+                "parameters": {
+                    "markdown": { "type": "string", "required": true },
+                    "format": { "type": "string", "enum": ["pdf", "epub"], "default": "pdf" },
+                    "theme": { "type": "integer", "default": 0 }
+                }
+            },
+            "themes": {
+                "method": "GET",
+                "path": "/api/themes",
+                "description": "Lista todos os 50 temas disponíveis"
+            },
+            "templates": {
+                "method": "GET",
+                "path": "/api/templates",
+                "description": "Lista templates disponíveis"
+            }
+        }
+    }
+    </script>
+
+    <!-- CSS (carregamento assíncrono para não bloquear render) -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/editor.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/preview.css">
+    <link rel="stylesheet" href="css/modals.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" href="css/pix.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="css/editor.css">
+        <link rel="stylesheet" href="css/modals.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="brand">
+            <i class="fas fa-crown"></i>
+            MD2PDF <span>Premium</span>
+        </div>
+
+        <div class="config-area">
+            <label class="checkbox-wrapper" title="Gerar índice apenas para Capítulos (H1)">
+                <input type="checkbox" id="toc-check" checked>
+                <span data-i18n="toc">Índice de Capítulos</span>
+            </label>
+
+            <div class="theme-control-group">
+                <button class="nav-btn" id="prev-theme" title="Tema anterior"><i class="fas fa-chevron-left"></i></button>
+                <select id="theme-selector"></select>
+                <button class="nav-btn" id="next-theme" title="Próximo tema"><i class="fas fa-chevron-right"></i></button>
+                <button class="nav-btn" id="random-theme" title="Tema aleatório"><i class="fas fa-random"></i></button>
+            </div>
+        </div>
+
+        <div class="export-group">
+            <button class="btn-export pdf" data-action="pdf-settings" title="Configurar e exportar PDF">
+                <i class="fas fa-file-pdf"></i> <span data-i18n="pdf">PDF</span>
+            </button>
+            <button class="btn-export" id="btn-export" title="Exportar EPUB3">
+                <i class="fas fa-book"></i> <span data-i18n="epub">EPUB</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main>
+        <!-- Editor Pane -->
+        <div class="editor-pane">
+            <div class="editor-toolbar">
+                <div class="tool-group">
+                    <button class="tool-btn btn-upload" id="btn-upload-md" title="Carregar Arquivo .md" data-i18n-title="uploadFile">
+                        <i class="fas fa-file-import"></i>
+                    </button>
+                    <button class="tool-btn" id="btn-new-doc" title="Novo Documento"><i class="fas fa-file-circle-plus"></i></button>
+                    <input type="file" id="md-input" accept=".md,.markdown,.txt" class="hidden">
+                </div>
+
+                <div class="tool-separator"></div>
+
+                <div class="tool-group">
+                    <button class="tool-btn" data-action="heading" data-i18n-title="heading" title="Título"><i class="fas fa-heading"></i></button>
+                    <button class="tool-btn" data-action="bold" data-i18n-title="bold" title="Negrito"><i class="fas fa-bold"></i></button>
+                    <button class="tool-btn" data-action="italic" data-i18n-title="italic" title="Itálico"><i class="fas fa-italic"></i></button>
+                    <button class="tool-btn" data-action="strikethrough" data-i18n-title="strikethrough" title="Tachado"><i class="fas fa-strikethrough"></i></button>
+                </div>
+
+                <div class="tool-separator"></div>
+
+                <div class="tool-group">
+                    <button class="tool-btn" data-action="link" data-i18n-title="link" title="Link"><i class="fas fa-link"></i></button>
+                    <button class="tool-btn" id="btn-insert-image" data-i18n-title="image" title="Inserir Imagem"><i class="fas fa-image"></i></button>
+                    <button class="tool-btn" data-action="code" data-i18n-title="code" title="Código"><i class="fas fa-code"></i></button>
+                    <button class="tool-btn" data-action="codeblock" data-i18n-title="codeBlock" title="Bloco de Código"><i class="fas fa-file-code"></i></button>
+                </div>
+
+                <div class="tool-separator"></div>
+
+                <div class="tool-group">
+                    <button class="tool-btn" data-action="quote" data-i18n-title="quote" title="Citação"><i class="fas fa-quote-left"></i></button>
+                    <button class="tool-btn" data-action="ul" data-i18n-title="list" title="Lista"><i class="fas fa-list-ul"></i></button>
+                    <button class="tool-btn" data-action="ol" title="Lista Numerada"><i class="fas fa-list-ol"></i></button>
+                    <button class="tool-btn" data-action="table" data-i18n-title="table" title="Tabela"><i class="fas fa-table"></i></button>
+                    <button class="tool-btn" data-action="hr" data-i18n-title="hr" title="Linha Horizontal"><i class="fas fa-minus"></i></button>
+                    <button class="tool-btn" data-action="pagebreak" title="Quebra de Pagina"><i class="fas fa-file-lines"></i></button>
+                </div>
+
+                <div class="tool-separator"></div>
+
+                <div class="tool-group">
+                    <button class="tool-btn" data-action="template" title="Templates"><i class="fas fa-file-alt"></i></button>
+                    <button class="tool-btn" data-action="cover" title="Inserir Capa"><i class="fas fa-book-open"></i></button>
+                    <button class="tool-btn" data-action="stats" data-i18n-title="stats" title="Estatísticas"><i class="fas fa-chart-bar"></i></button>
+                    <button class="tool-btn" data-action="find" data-i18n-title="findReplace" title="Buscar (Ctrl+F)"><i class="fas fa-search"></i></button>
+                </div>
+
+                <div class="tool-separator"></div>
+
+                <div class="tool-group">
+                    <button class="tool-btn" data-action="undo" data-i18n-title="undo" title="Desfazer (Ctrl+Z)"><i class="fas fa-undo"></i></button>
+                    <button class="tool-btn" data-action="redo" data-i18n-title="redo" title="Refazer (Ctrl+Y)"><i class="fas fa-redo"></i></button>
+                </div>
+
+                <div class="tool-separator"></div>
+
+                <div class="tool-group">
+                    <button class="tool-btn" data-action="theme-editor-create" title="Criar Tema"><i class="fas fa-palette"></i></button>
+                    <button class="tool-btn" data-action="projects" title="Projetos (Ctrl+Shift+S)"><i class="fas fa-folder-open"></i></button>
+                    <button class="tool-btn" data-action="shortcuts" title="Atalhos"><i class="fas fa-keyboard"></i></button>
+                    <button class="tool-btn" data-action="fullscreen" title="Tela Cheia"><i class="fas fa-expand"></i></button>
+                    <button class="tool-btn" data-action="language" title="Mudar Idioma"><i class="fas fa-globe"></i></button>
+                </div>
+            </div>
+
+            <!-- Find & Replace Bar -->
+            <div class="find-replace-bar hidden" id="find-replace-bar">
+                <div class="find-row">
+                    <input type="text" id="find-input" placeholder="Buscar..." oninput="FindReplace.find()">
+                    <span class="find-info" id="find-info"></span>
+                    <button class="find-btn" onclick="FindReplace.findPrev()" title="Anterior"><i class="fas fa-chevron-up"></i></button>
+                    <button class="find-btn" onclick="FindReplace.findNext()" title="Próximo"><i class="fas fa-chevron-down"></i></button>
+                    <label class="find-btn" title="Maiúsculas/Minúsculas"><input type="checkbox" id="find-match-case" onchange="FindReplace.find()" style="display:none"><i class="fas fa-font"></i></label>
+                    <button class="close-find" onclick="FindReplace.close()"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="find-row replace-row">
+                    <input type="text" id="replace-input" placeholder="Substituir por...">
+                    <button class="find-btn" onclick="FindReplace.replace()" title="Substituir"><i class="fas fa-exchange-alt"></i></button>
+                    <button class="find-btn" onclick="FindReplace.replaceAll()" title="Substituir Todos"><i class="fas fa-check-double"></i></button>
+                </div>
+            </div>
+
+            <textarea id="markdown-input" placeholder="# Título do Livro&#10;&#10;Texto introdutório...&#10;&#10;## Capítulo 1&#10;&#10;Início do capítulo..."></textarea>
+        </div>
+
+        <!-- Resize Handle -->
+        <div class="resize-handle"></div>
+
+        <!-- Preview Pane -->
+        <div class="preview-pane">
+            <div class="book-paper" id="book-paper">
+                <div id="preview-content"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="app-footer">
+        <a href="https://resende.com.br/lp/pedroluz" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-code"></i> Desenvolvido por Pedro Luz
+        </a>
+        <span class="footer-sep">|</span>
+        <a href="javascript:void(0)" onclick="openPixModal()" class="footer-pix">
+            <i class="fas fa-coffee"></i> Ofereça um Cafezinho
+        </a>
+    </footer>
+
+    <!-- ===== STATUS BAR ===== -->
+    <div class="status-bar">
+        <div class="stats" id="status-stats">
+            <span><i class="fas fa-font"></i> 0 palavras</span>
+            <span><i class="fas fa-text-width"></i> 0 caracteres</span>
+            <span><i class="fas fa-align-left"></i> 0 linhas</span>
+            <span><i class="fas fa-clock"></i> ~0 min</span>
+        </div>
+        <div>
+            <span id="save-status" class="save-status"><i class="fas fa-check"></i> Pronto</span>
+            <span class="footer-sep">|</span>
+            <button class="autosave-toggle" id="autosave-toggle" title="Ligar/Desligar Auto-save">
+                <i class="fas fa-save"></i> <span id="autosave-label">Auto-save: ON</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== TOAST CONTAINER ===== -->
+    <div class="toast-container" id="toast-area"></div>
+
+    <!-- ===== PIX MODAL ===== -->
+    <div class="pix-modal-overlay" id="pixModalOverlay">
+        <div class="pix-modal" id="pixModal">
+            <div class="pix-modal-header">
+                <h3><i class="fas fa-coffee"></i> Cafezinho</h3>
+                <button class="pix-modal-close" onclick="closePixModal()">&times;</button>
+            </div>
+            <div class="pix-modal-body">
+                <p class="pix-modal-desc">Gostou do MD2PDF? Considere me oferecer um cafezinho!</p>
+                <p class="pix-modal-desc" style="font-size:0.72rem; color:#999; margin:0 0 8px;">100% seguro. O pagamento vai direto para a conta do desenvolvedor.</p>
+
+                <div class="pix-modal-steps">
+                    <span><span class="pix-step-num">1</span> Escolha o valor</span>
+                    <span><span class="pix-step-num">2</span> Escaneie ou copie</span>
+                    <span><span class="pix-step-num">3</span> Confirme no banco</span>
+                </div>
+
+                <div class="pix-values" id="pixValues"></div>
+                <div class="pix-custom-value">
+                    <span>Outro valor:</span>
+                    <input id="pixCustomInput" type="number" min="1" step="1" placeholder="R$ 0">
+                </div>
+
+                <div class="pix-msg-field">
+                    <label>Mensagem (opcional):</label>
+                    <input id="pixMsgInput" type="text" maxlength="72" placeholder="Ex: Parabens pelo trabalho!">
+                </div>
+
+                <div class="pix-qr-wrap"><img id="pixQr" src="" alt="QR Code Pix"></div>
+                <p class="pix-qr-hint">Escaneie com o app do seu banco ou Copia e Cola</p>
+
+                <button class="pix-copy-btn" id="pixCopyBtn" onclick="copiarPix()"><i class="fas fa-copy"></i> Copiar Pix Copia e Cola</button>
+                <div class="pix-payload-text" id="pixPayloadText" onclick="copiarPix()"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPTS (defer para PageSpeed) ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" defer></script>
+
+    <script src="js/i18n.js" defer></script>
+    <script src="js/storage.js" defer></script>
+    <script src="js/themes.js" defer></script>
+    <script src="js/preview.js" defer></script>
+    <script src="js/find-replace.js" defer></script>
+    <script src="js/stats.js" defer></script>
+    <script src="js/image-manager.js" defer></script>
+    <script src="js/templates.js" defer></script>
+    <script src="js/theme-editor.js" defer></script>
+    <script src="js/pdf-generator.js" defer></script>
+    <script src="js/epub-generator.js" defer></script>
+    <script src="js/pix.js" defer></script>
+    <script src="js/editor.js" defer></script>
+    <script src="js/app.js" defer></script>
+
+    <!-- Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(() => {});
+            });
+        }
+    </script>
+</body>
+</html>

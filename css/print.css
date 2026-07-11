@@ -1,0 +1,98 @@
+/* ============================================
+   PRINT.CSS - Estilos de Impressão
+   OBS: @page e estilos específicos de tema
+   são injetados via JS (pdf-generator.js)
+   ============================================ */
+
+@media print {
+    /* Preservação de cores */
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Esconde toda a UI */
+    header,
+    .editor-pane,
+    .toast-container,
+    .status-bar,
+    .resize-handle,
+    .modal-overlay,
+    .find-replace-bar,
+    .fullscreen-btn,
+    .app-footer,
+    .pix-modal-overlay {
+        display: none !important;
+    }
+
+    /* Reseta o layout */
+    body {
+        background: white;
+        height: auto;
+        overflow: visible !important;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    main {
+        display: block !important;
+        height: auto !important;
+    }
+
+    .preview-pane {
+        background: white !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        display: block !important;
+        width: 100% !important;
+        position: static !important;
+    }
+
+    .book-paper {
+        box-shadow: none !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    #preview-content {
+        display: block !important;
+        opacity: 1 !important;
+        width: 100%;
+        color: inherit !important;
+    }
+
+    /* Page break rules - cobertura completa */
+    h1, h2 { page-break-before: always; }
+    h1:first-of-type, h2:first-of-type { page-break-before: auto; }
+    h1, h2, h3, h4 { page-break-after: avoid; }
+    p { orphans: 3; widows: 3; }
+    blockquote, ul, ol, li, table, figure, pre { page-break-inside: avoid; }
+    img { page-break-inside: avoid; max-width: 100% !important; height: auto; }
+
+    /* Tipografia refinada na impressão */
+    p {
+        font-kerning: normal;
+        orphans: 3;
+        widows: 3;
+    }
+    a {
+        color: #333 !important;
+        text-decoration: none !important;
+    }
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+    nav a::after, .toc a::after, a[href^="#"]::after,
+    .toc-block a::after, a[href^="javascript"]::after {
+        content: none !important;
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "name": "MD2PDF Premium Studio",
+    "short_name": "MD2PDF",
+    "description": "Editor Markdown profissional com 50 temas premium, exportação PDF e EPUB3",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "background_color": "#eef2f5",
+    "theme_color": "#2d5a27",
+    "orientation": "any",
+    "categories": ["productivity", "utilities", "design"],
+    "lang": "pt-BR",
+    "dir": "ltr",
+    "id": "/",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        }
+    ],
+    "screenshots": [],
+    "shortcuts": [
+        {
+            "name": "Novo Documento",
+            "short_name": "Novo",
+            "description": "Criar novo documento Markdown",
+            "url": "./index.html?action=new"
+        },
+        {
+            "name": "Abrir Arquivo",
+            "short_name": "Abrir",
+            "description": "Abrir arquivo .md existente",
+            "url": "./index.html?action=open"
+        }
+    ]
+}
