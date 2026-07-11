@@ -3460,7 +3460,6 @@ const ThemeManager = {
             }
             /* Elementos decorativos */
             ${ornamentDividerCSS(accentColor)}
-            ${dropCapEliteCSS(accentColor)}
             /* Esconde UI */
             #app, header, .editor-pane, .status-bar,
             .toolbar, .find-replace-bar, .pix-modal-overlay,
@@ -3587,7 +3586,6 @@ const ThemeManager = {
                 orphans: 2;
                 widows: 2;
             }
-            ${dropCapEliteCSS(accentColor)}
             ${ornamentDividerCSS(accentColor)}
         `;
         if (document.body.classList.contains('educational-mode')) {
