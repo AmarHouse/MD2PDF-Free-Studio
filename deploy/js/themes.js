@@ -58,7 +58,7 @@ const getPremiumBlockCSS = (accentColor, opts = {}) => {
     }
     blockquote p {
         margin: 0.6em 0;
-        padding-left: 24px;
+        padding-left: 60px;
     }
     blockquote p:first-child {
         margin-top: 0;
