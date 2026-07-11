@@ -96,10 +96,24 @@ Create a v1.0.0 GitHub Release. Releases appear in subscribers' feeds and trigge
 
 ## 7. Priority Action Items
 
-1. **Today:** MIT License, Topics, Homepage URL, Star, English description
-2. **Today:** README with badges + GIF + CTA
-3. **Today:** Create v1.0.0 release
-4. **This week:** Issue templates + GitHub Pages
-5. **This week:** Reddit + HN launch posts
-6. **This month:** MCP Registry + Awesome Lists PRs
-7. **Ongoing:** 1 release per month to keep project active
+### ✅ Done
+- [x] MIT License, Topics, Homepage URL, Star, English description
+- [x] README with badges + CTA
+- [x] v1.0.0 release
+- [x] Issue templates + CONTRIBUTING.md
+
+### ⏳ Waiting — One Person Business Book Launch
+
+These steps should be executed AFTER the book is published, so the offering in AgenticPDF points to a real product:
+
+- [ ] Reddit launch posts (r/webdev, r/javascript, r/programming)
+- [ ] Hacker News: "Show HN" post
+- [ ] Twitter/X thread with demo
+- [ ] Submit to Awesome Lists (awesome-markdown, awesome-pdf, awesome-pwa)
+- [ ] Submit to MCP Registry (modelcontextprotocol/servers, mcp.so, smithery.ai)
+- [ ] Update config.json offering with book purchase link
+- [ ] Create demo GIF/screenshot for README
+- [ ] Set up GitHub Pages documentation
+- [ ] Enable GitHub Discussions
+- [ ] Create roadmap in GitHub Projects
+- [ ] Monthly releases to keep project active
