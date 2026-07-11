@@ -13,7 +13,7 @@
 | **Branch** | `main` |
 | **Diretório raiz** | (deixe em branco — o projeto já está na raiz) |
 | **Build command** | (deixe em branco — é site estático) |
-| **Build output directory** | (deixe em branco) |
+| **Build output directory** | `deploy` (obrigatório — todo o conteudo público está nesta pasta) |
 
 5. Clique em **Salvar e Implantar**
 

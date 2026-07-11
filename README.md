@@ -17,6 +17,9 @@
 
 ### 👉 [md2pdf-free-studio.pages.dev](https://md2pdf-free-studio.pages.dev/)
 
+> **Note:** All public files live in `/deploy`.  
+> Internal documentation (strategy, next steps, etc.) stays in the root — not published.
+
 ---
 
 ## ✨ Features
