@@ -2,7 +2,7 @@
    SW.JS - Service Worker com Cache Inteligente
    ============================================ */
 
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v4';
 const CACHE_NAME = `md2pdf-${CACHE_VERSION}`;
 const CACHE_CDN = `md2pdf-cdn-${CACHE_VERSION}`;
 
@@ -19,6 +19,9 @@ const LOCAL_ASSETS = [
     './js/i18n.js',
     './js/storage.js',
     './js/themes.js',
+    './js/markdown-normalize.js',
+    './js/vendor/dompurify.min.js',
+    './js/sanitize.js',
     './js/preview.js',
     './js/find-replace.js',
     './js/stats.js',

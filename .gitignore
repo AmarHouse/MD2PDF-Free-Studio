@@ -1,5 +1,32 @@
+# Dependencias
 node_modules/
 _node_modules_temp/
+
+# Erro corrigido do upstream: estado de sessao do navegador versionado
+# (cookies de sessao do Google em browser-state-0*.json). Nunca versionar.
+browser-state-*.json
+browser-state-*-fingerprint.json
+
+# Ambiente - segredos nunca entram na fabrica; .env.example e o unico
+# modelo de ambiente permitido
+.env
+.env.*
+!.env.example
+
+# Artefatos de teste e build
+test-results/
+playwright-report/
+coverage/
+*.tsbuildinfo
+dist/
+build/
+
+# Saida do gate de impressao (regenerada por `npx playwright test`)
+test/.out-*.pdf
+test/.print-doc*.html
+test/__pycache__/
+
+# Editor/OS
 .vscode/
 *.log
 .DS_Store

@@ -69,12 +69,42 @@
     }
 
     /* Page break rules - cobertura completa */
-    h1, h2 { page-break-before: always; }
-    h1:first-of-type, h2:first-of-type { page-break-before: auto; }
-    h1, h2, h3, h4 { page-break-after: avoid; }
+    h1 { break-before: page; }
+    h1:first-of-type { break-before: auto; }
+    h1, h2, h3, h4 { break-after: avoid; }
     p { orphans: 3; widows: 3; }
-    blockquote, ul, ol, li, table, figure, pre { page-break-inside: avoid; }
-    img { page-break-inside: avoid; max-width: 100% !important; height: auto; }
+    blockquote, ul, ol, li, table, figure { break-inside: avoid; }
+    img { break-inside: avoid; max-width: 100% !important; height: auto; }
+
+    /* Perfil de impressão para Markdown gerado por IA.
+       Alvo: nada transborda a página. Bloco de código e URL longa são o
+       caso comum de saída de IA e, sem estas regras, somem da página. */
+    thead { display: table-header-group; }
+    tr { break-inside: avoid; }
+    table { width: 100%; font-size: 0.85em; border-collapse: collapse; }
+    td, th { word-break: break-word; overflow-wrap: anywhere; }
+    pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        break-inside: auto;
+    }
+    code { overflow-wrap: anywhere; }
+    img { max-height: 200mm; object-fit: contain; }
+    a { overflow-wrap: anywhere; }
+
+    /* Quebra forçada \pagebreak: o div é o mecanismo de quebra; o indicador
+       visual do preview é neutralizado na impressão */
+    #preview-content .page-break {
+        break-after: page;
+        border: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    #preview-content .page-break::after {
+        content: none !important;
+    }
 
     /* Tipografia refinada na impressão */
     p {

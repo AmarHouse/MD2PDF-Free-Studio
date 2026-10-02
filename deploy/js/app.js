@@ -3,22 +3,59 @@
    ============================================ */
 
 const ModalManager = {
+    // S1 (classe P7/P10): este era um sink universal — title, content e
+    // buttons[].text/class/action eram interpolados em innerHTML. Qualquer
+    // caller futuro passando dado de terceiros reabriria XSS.
+    // Contrato novo:
+    //  - title: TEXTO — via textContent (DOM), nunca interpolação.
+    //  - content: HTML por contrato — os 9 modais montam formulários com
+    //    atributos (value=, checked, selected) e Sanitize.html() os
+    //    quebraria; os callers que interpolaram dado não-constante no
+    //    content (projetos, settings de PDF, tema do editor) foram
+    //    corrigidos na origem (editor.js, pdf-generator.js, theme-editor.js).
+    //  - buttons[].text: TEXTO — via textContent.
+    //  - buttons[].class/action: VALIDADOS (viram atributo class/data-action
+    //    e seletor de clique) — token seguro ou default/descarte.
+    // SIZES_ALLOWED valida o tamanho do modal (vira className).
+    SIZES_ALLOWED: ['sm', 'md', 'lg', 'xl'],
+    BTN_CLASS_RE: /^[A-Za-z0-9_-]+$/,
+    ACTION_RE: /^[A-Za-z0-9_-]+$/,
+
     create({ title, size = 'md', content, buttons = [] }) {
         const overlay = document.createElement('div');
         overlay.className = 'modal-overlay';
+        const sizeClass = this.SIZES_ALLOWED.includes(size) ? size : 'md';
         overlay.innerHTML = `
-            <div class="modal modal-${size}">
+            <div class="modal modal-${sizeClass}">
                 <div class="modal-header">
-                    <h3>${title}</h3>
+                    <h3></h3>
                     <button class="modal-close" data-action="close"><i class="fas fa-times"></i></button>
                 </div>
-                <div class="modal-body">${content}</div>
-                ${buttons.length ? `
-                <div class="modal-footer">
-                    ${buttons.map(b => `<button class="btn ${b.class || 'btn-secondary'}" data-action="${b.action}">${b.text}</button>`).join('')}
-                </div>` : ''}
+                <div class="modal-body"></div>
+                <div class="modal-footer"></div>
             </div>
         `;
+
+        const h3 = overlay.querySelector('.modal-header h3');
+        h3.textContent = typeof title === 'string' ? title : '';
+
+        const body = overlay.querySelector('.modal-body');
+        if (typeof content === 'string') body.innerHTML = content;
+
+        const footer = overlay.querySelector('.modal-footer');
+        const list = Array.isArray(buttons) ? buttons : [];
+        for (const b of list) {
+            if (!b || typeof b !== 'object') continue;
+            const action = (typeof b.action === 'string' && this.ACTION_RE.test(b.action)) ? b.action : '';
+            if (!action) continue;
+            const cls = (typeof b.class === 'string' && this.BTN_CLASS_RE.test(b.class)) ? b.class : 'btn-secondary';
+            const btn = document.createElement('button');
+            btn.className = 'btn ' + cls;
+            btn.dataset.action = action;
+            btn.textContent = typeof b.text === 'string' ? b.text : '';
+            footer.appendChild(btn);
+        }
+        if (footer.children.length === 0) footer.remove();
 
         document.body.appendChild(overlay);
 
@@ -58,6 +95,12 @@ const App = {
         Editor.init();
         FindReplace.init();
         ImageManager.init();
+        // N11 (review 2026-10-02b): init() é o único ponto que lê
+        // pdfSettings do localStorage. Sem esta chamada as preferências de
+        // página (margens, tamanho, orientação, numeração) nunca eram
+        // restauradas entre sessões — o modal abria com inputs vazios e o
+        // export caía nos defaults (20mm) em vez do que o usuário salvou.
+        PDFGenerator.init();
         Stats.init?.();
 
         this.initMobileTabs();
@@ -273,7 +316,16 @@ const App = {
         const el = document.createElement('div');
         el.className = `toast ${type}`;
         const icon = type === 'success' ? 'check' : type === 'error' ? 'exclamation-circle' : 'info-circle';
-        el.innerHTML = `<i class="fas fa-${icon}"></i> ${msg}`;
+        // P7: msg pode conter texto de terceiros (file.name, nome de template
+        // ou de tema) — montar SEM interpolação em HTML: o <i> via DOM e o
+        // texto via textContent. O visual (fas + ícone) é preservado.
+        // type é parâmetro interno (default 'info'; todos os call sites usam
+        // constantes) e vai só para className (propriedade, sem parse de HTML)
+        // e para o ternário do ícone — não há contexto de atributo.
+        const iconEl = document.createElement('i');
+        iconEl.className = `fas fa-${icon}`;
+        el.appendChild(iconEl);
+        el.appendChild(document.createTextNode(' ' + msg));
         this.dom.toastArea.appendChild(el);
         setTimeout(() => {
             el.style.opacity = '0';

@@ -1,11 +1,12 @@
 {
-  "name": "md2pdf-studio",
-  "version": "2.0.0",
-  "description": "Editor Markdown para PDF e EPUB3 com 50 temas — gratuito",
+  "name": "md2pdf",
+  "version": "2.1.0",
+  "description": "Editor Markdown para PDF e EPUB3 com 50 temas - gratuito",
+  "license": "MIT",
+  "private": true,
   "scripts": {
-    "test": "npx playwright test",
-    "test:headed": "npx playwright test --headed",
-    "test:debug": "npx playwright test --debug"
+    "dev": "npx serve deploy",
+    "test": "playwright test"
   },
   "devDependencies": {
     "@playwright/test": "^1.45.0",

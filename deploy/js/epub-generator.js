@@ -12,8 +12,9 @@ const EPUBGenerator = {
         try {
             const zip = new JSZip();
             const theme = ThemeManager.get(App.dom.select.value);
-            let contentHTML = marked.parse(App.dom.input.value);
+            let contentHTML = marked.parse(MarkdownNormalize.normalize(App.dom.input.value));
             contentHTML = App.processSpecialBlocks(contentHTML);
+            contentHTML = Sanitize.html(contentHTML);
 
             // Build TOC
             if (App.dom.tocCheck.checked) {
@@ -74,9 +75,19 @@ const EPUBGenerator = {
             }
             contentHTML = doc.body.innerHTML;
 
-            // Extract metadata
+            // XHTML exige void elements self-closed (<img />, <hr />); o
+            // serializer HTML do DOMParser emite <img> sem a barra — sem
+            // isso o XML do EPUB fica malformado (critério A9).
+            contentHTML = contentHTML.replace(
+                /<(img|br|hr|meta|link|input|source|track|wbr|area|base|col|embed|param)\b((?:[^>"']|"[^"]*"|'[^']*')*?)(\s*)\/?\s*>/gi,
+                '<$1$2 />'
+            );
+
+            // Extract metadata. O título é interpolado cru no XHTML (title,
+            // dc:title, nav): passa pelo sanitizador para nunca carregar
+            // <script> nem quebrar o XML (A9).
             const titleMatch = App.dom.input.value.match(/^#\s+(.*)$/m);
-            const bookTitle = titleMatch ? titleMatch[1] : "Livro";
+            const bookTitle = titleMatch ? Sanitize.html(titleMatch[1]) : "Livro";
             const cleanId = bookTitle.replace(/[^a-zA-Z0-9]/g, "_");
 
             // EPUB structure

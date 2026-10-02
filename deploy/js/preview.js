@@ -88,12 +88,17 @@ const Preview = {
         this.loadThemeFonts(theme);
 
         marked.setOptions({ breaks: true, gfm: true });
-        let html = marked.parse(text);
+        let html = marked.parse(MarkdownNormalize.normalize(text));
         html = App.processSpecialBlocks(html);
-        App.dom.preview.innerHTML = html;
+        App.dom.preview.innerHTML = Sanitize.html(html);
 
+        // S6: buildThemeCSS é side-effect (não retorna CSS — cria o
+        // <style id="theme-style"> com textContent); o retorno aqui é
+        // undefined. Atribuir a innerHTML viraria o texto "undefined" —
+        // sink morto da classe innerHTML. textContent mantém o comportamento
+        // inerte sem passar por parse de HTML.
         const fullCSS = ThemeManager.buildThemeCSS(theme);
-        this.styleEl.innerHTML = fullCSS;
+        this.styleEl.textContent = fullCSS || '';
     },
 
     renderSync() {
@@ -104,11 +109,11 @@ const Preview = {
         this.loadThemeFonts(theme);
 
         marked.setOptions({ breaks: true, gfm: true });
-        let html = marked.parse(text);
+        let html = marked.parse(MarkdownNormalize.normalize(text));
         html = App.processSpecialBlocks(html);
-        App.dom.preview.innerHTML = html;
+        App.dom.preview.innerHTML = Sanitize.html(html);
 
         const fullCSS = ThemeManager.buildThemeCSS(theme);
-        this.styleEl.innerHTML = fullCSS;
+        this.styleEl.textContent = fullCSS || '';
     }
 };

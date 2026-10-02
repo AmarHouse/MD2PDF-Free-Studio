@@ -451,19 +451,43 @@ const dropCapEliteCSS = (accentColor) => `
 
 /* ═══ CSS de Quebra de Página Premium ═══ */
 const pageBreakCSS = `
-    h1, h2 {
-        page-break-before: always;
+    h1 {
+        break-before: page;
     }
     body > *:first-child,
-    body > *:first-child h1,
-    body > *:first-child h2 {
-        page-break-before: auto !important;
+    body > *:first-child h1 {
+        break-before: auto !important;
     }
     h1, h2, h3, h4 {
-        page-break-after: avoid;
+        break-after: avoid;
     }
-    p, ul, ol, blockquote, table, img, figure, pre, code {
-        page-break-inside: avoid;
+    /* pre e code ficam de fora do break-inside: avoid de proposito. Bloco de
+       codigo maior que a pagina e saida comum de IA, e avoid empurra o bloco
+       inteiro para a pagina seguinte, deixando uma quasi-vazia atras. */
+    p, ul, ol, blockquote, table, img, figure {
+        break-inside: avoid;
+    }
+    thead {
+        display: table-header-group;
+    }
+    tr {
+        break-inside: avoid;
+    }
+    td, th {
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+    pre, code, a {
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+    img {
+        max-height: 200mm;
+        object-fit: contain;
+    }
+    .page-break {
+        break-after: page;
     }
     p {
         orphans: 3;
@@ -3361,7 +3385,12 @@ const THEMES = [
    ============================================ */
 
 // StorageManager compat (usado por renderList/selectTheme)
-if (typeof StorageManager === 'undefined') {
+// ATENÇÃO (descoberto no fecho de S5): em Chromium, `window.StorageManager`
+// é a interface NATIVA da Storage API (function) — o guard antigo
+// (`typeof === 'undefined'`) nunca disparava e o objeto compat não existia;
+// renderList/selectTheme quebrariam no primeiro uso. O guard agora detecta
+// por CAPACIDADE (getSettings é função do objeto do produto), não por nome.
+if (typeof StorageManager === 'undefined' || typeof StorageManager.getSettings !== 'function') {
     var StorageManager = {
         getSettings() { return JSON.parse(localStorage.getItem('md2pdf_settings') || '{}'); },
         updateSettings(partial) {
@@ -3413,7 +3442,9 @@ const ThemeManager = {
     },
 
     getPrintCSS(theme) {
-        const accentColor = theme.color || '#333';
+        // S6: theme.color é interpolado no CSS (ornamentDividerCSS) —
+        // validado como cor na fronteira; inválido cai no neutro '#333'.
+        const accentColor = Sanitize.color(theme.color || '#333');
         const themeBodyCSS = theme.css
             .replace(/padding:\s*[^;]+;?/gi, '')
             .replace(/margin:\s*[^;]+;?/gi, '')
@@ -3490,21 +3521,42 @@ const ThemeManager = {
                 width: 100% !important;
                 background: white !important;
             }
-            h1, h2 {
-                page-break-before: always;
+            h1 {
+                break-before: page;
             }
-            h1:first-of-type, h2:first-of-type {
-                page-break-before: auto;
+            h1:first-of-type {
+                break-before: auto;
             }
             h1, h2, h3, h4 {
-                page-break-after: avoid;
+                break-after: avoid;
             }
-            p, ul, ol, blockquote, table, img, figure, pre, code {
-                page-break-inside: avoid;
+            /* pre/code fora do break-inside: avoid — ver comentário em pageBreakCSS */
+            p, ul, ol, blockquote, table, img, figure {
+                break-inside: avoid;
+            }
+            thead {
+                display: table-header-group;
+            }
+            tr {
+                break-inside: avoid;
+            }
+            td, th {
+                word-break: break-word;
+                overflow-wrap: anywhere;
+            }
+            pre, code, a {
+                white-space: pre-wrap;
+                word-break: break-word;
+                overflow-wrap: anywhere;
+            }
+            .page-break {
+                break-after: page;
             }
             img {
                 max-width: 100% !important;
+                max-height: 200mm !important;
                 height: auto !important;
+                object-fit: contain;
             }
             .cover-block {
                 page-break-after: always;
@@ -3550,7 +3602,11 @@ const ThemeManager = {
 
     buildThemeCSS(theme) {
         const colorOverride = this.getColorOverride();
-        const accentColor = colorOverride || theme.color || '#333';
+        // S6: colorOverride (localStorage) e theme.color (editor de temas)
+        // são interpolados em CSS (color:, background:, linear-gradient) —
+        // validados como cor na fronteira; inválido cai no neutro '#333'.
+        const accentColor = Sanitize.color(colorOverride || theme.color || '#333');
+        const headingColor = Sanitize.color(colorOverride || theme.color || '#1a1a1a');
         const themeBodyCSS = theme.css
             .replace(/padding:\s*[^;]+;?/gi, '')
             .replace(/margin:\s*[^;]+;?/gi, '')
@@ -3576,7 +3632,7 @@ const ThemeManager = {
             #preview-content h1, #preview-content h2, #preview-content h3,
             #preview-content h4, #preview-content h5, #preview-content h6 {
                 font-family: ${theme.fonts.head};
-                color: ${colorOverride || theme.color || '#1a1a1a'};
+                color: ${headingColor};
                 text-rendering: optimizeLegibility;
                 font-kerning: normal;
                 font-feature-settings: "liga" 1, "kern" 1, "dlig" 1;
@@ -3631,15 +3687,19 @@ const ThemeManager = {
         const headingPreview = document.getElementById('theme-preview-heading');
         if (headingPreview) {
             headingPreview.style.fontFamily = theme.fonts.head;
-            headingPreview.style.color = theme.color;
+            // N13 (review 2026-10-02b): theme.color vem do editor de temas
+            // (entrada do usuário). Os demais sinks passam por Sanitize.color
+            // — estes 3 setters CSSOM ficavam crus (inertes hoje, pois os
+            // elementos de preview não existem no DOM, mas inconsistentes).
+            headingPreview.style.color = Sanitize.color(theme.color);
         }
         const blockPreview = document.getElementById('theme-preview-blockquote');
         if (blockPreview) {
-            blockPreview.style.borderLeftColor = theme.color;
+            blockPreview.style.borderLeftColor = Sanitize.color(theme.color);
         }
         const codePreview = document.getElementById('theme-preview-code');
         if (codePreview) {
-            codePreview.style.color = theme.color;
+            codePreview.style.color = Sanitize.color(theme.color);
         }
     },
 
@@ -3660,16 +3720,24 @@ const ThemeManager = {
             groupTitle.textContent = groupName;
             groupDiv.appendChild(groupTitle);
             groups[groupName].forEach(theme => {
+                // S5: a lista era montada com ${theme.color} em style="..." e
+                // ${theme.name} em HTML — theme.name/color vêm do editor de
+                // temas (entrada do usuário). Montagem via DOM: cor validada
+                // (Sanitize.color) na propriedade style, nome via textContent.
                 const item = document.createElement('div');
                 item.className = 'theme-item';
                 item.dataset.themeId = theme.id;
                 if (StorageManager.getSettings().themeId === theme.id) {
                     item.classList.add('active');
                 }
-                item.innerHTML = `
-                    <div class="theme-item-color" style="background: ${theme.color}"></div>
-                    <span class="theme-item-name">${theme.name}</span>
-                `;
+                const colorBox = document.createElement('div');
+                colorBox.className = 'theme-item-color';
+                colorBox.style.background = Sanitize.color(theme.color);
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'theme-item-name';
+                nameSpan.textContent = theme.name;
+                item.appendChild(colorBox);
+                item.appendChild(nameSpan);
                 item.addEventListener('click', () => this.selectTheme(theme.id));
                 groupDiv.appendChild(item);
             });

@@ -9,6 +9,11 @@ const ImageManager = {
     // Configuração ImgBB
     IMGBB_API_KEY: 'a8ddbba76fb73a08f9d36aa5b7b9cecf',
     IMGBB_API_URL: 'https://api.imgbb.com/1/upload',
+
+    // Hosts de imagem com domínio próprio (P7): a validação é por HOSTNAME do
+    // URL parseado, nunca por includes() na string crua. Subdomínios são
+    // aceitos (i.imgur.com, res.cloudinary.com, images.unsplash.com).
+    ALLOWED_IMAGE_HOSTS: ['imgur.com', 'imgbb.com', 'cloudinary.com', 'unsplash.com'],
     
     init() {
         this.bindEvents();
@@ -93,7 +98,20 @@ const ImageManager = {
             urlDebounce = setTimeout(() => {
                 const url = urlInput.value.trim();
                 if (url && this.isValidImageUrl(url)) {
-                    previewUrl.innerHTML = `<img src="${url}" onerror="this.parentElement.innerHTML='<span class=\\'placeholder\\'><i class=\\'fas fa-exclamation-triangle\\'></i> Não foi possível carregar a imagem</span>'">`;
+                    // P7: nada de interpolação de valor do usuário em HTML.
+                    // O <img> é criado via DOM (.src/.alt), então a URL não
+                    // entra em contexto de atributo; o fallback de erro é um
+                    // handler registrado (addEventListener), não um atributo
+                    // onerror inline.
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.alt = '';
+                    img.addEventListener('error', () => {
+                        previewUrl.innerHTML = '<span class="placeholder"><i class="fas fa-exclamation-triangle"></i> Não foi possível carregar a imagem</span>';
+                        previewUrl.classList.remove('has-image');
+                    });
+                    previewUrl.innerHTML = '';
+                    previewUrl.appendChild(img);
                     previewUrl.classList.add('has-image');
                 } else {
                     previewUrl.innerHTML = '<span class="placeholder"><i class="fas fa-image"></i> A preview aparecerá aqui</span>';
@@ -122,7 +140,12 @@ const ImageManager = {
             
             const reader = new FileReader();
             reader.onload = (ev) => {
-                previewUpload.innerHTML = `<img src="${ev.target.result}">`;
+                // P7: mesmo tratamento — a data URL entra via propriedade DOM
+                // (.src), nunca por interpolação em HTML.
+                previewUpload.innerHTML = '';
+                const img = document.createElement('img');
+                img.src = ev.target.result;
+                previewUpload.appendChild(img);
                 previewUpload.classList.add('has-image');
                 previewUpload.dataset.dataUrl = ev.target.result;
                 previewUpload.dataset.fileName = file.name;
@@ -133,7 +156,13 @@ const ImageManager = {
                 uploadStatus.style.display = 'block';
                 uploadStatus.style.background = '#f0fdf4';
                 uploadStatus.style.color = '#16a34a';
-                uploadStatus.innerHTML = `<i class="fas fa-check-circle"></i> ${file.name} (${sizeText})`;
+                // P7: file.name é texto de terceiros — textContent, nunca
+                // innerHTML. O <i> é criado via DOM para preservar o visual.
+                uploadStatus.textContent = '';
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-check-circle';
+                uploadStatus.appendChild(icon);
+                uploadStatus.appendChild(document.createTextNode(` ${file.name} (${sizeText})`));
             };
             reader.readAsDataURL(file);
         });
@@ -215,7 +244,13 @@ const ImageManager = {
             if (statusEl) {
                 statusEl.style.background = '#fee2e2';
                 statusEl.style.color = '#dc2626';
-                statusEl.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Erro: ${error.message}`;
+                // P7: error.message pode vir da resposta da API ImgBB — texto
+                // de terceiros — textContent, nunca innerHTML.
+                statusEl.textContent = '';
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-exclamation-triangle';
+                statusEl.appendChild(icon);
+                statusEl.appendChild(document.createTextNode(` Erro: ${error.message}`));
             }
             
             // Fallback: usar base64 se ImgBB falhar
@@ -225,14 +260,37 @@ const ImageManager = {
     },
 
     isValidImageUrl(url) {
+        if (typeof url !== 'string') return false;
+        const trimmed = url.trim();
+        if (!trimmed) return false;
+        // Fronteira defensiva (SECURITY-POLICY, princípio 14): a função valida
+        // os próprios precondicionais, independentemente de quem chama. A URL
+        // crua não pode conter delimitador de atributo/HTML: um `"` quebraria
+        // qualquer contexto de atributo se um caller voltasse a interpolar.
+        // URLs reais nunca contêm " < > (data:image/svg+xml com < literal fica
+        // fora — só base64/percent-encoded é aceito).
+        if (/["<>]/.test(trimmed)) return false;
         try {
-            new URL(url);
-            return /\.(jpg|jpeg|png|gif|svg|webp|bmp|ico)(\?.*)?$/i.test(url)
-                || url.includes('imgur.com')
-                || url.includes('imgbb.com')
-                || url.includes('cloudinary.com')
-                || url.includes('unsplash.com')
-                || url.startsWith('data:image/');
+            const parsed = new URL(trimmed);
+            // data: só para data:image/ (fluxo readAsDataURL do upload).
+            if (parsed.protocol === 'data:') {
+                return /^data:image\//i.test(trimmed);
+            }
+            // Protocolo restrito a http(s) — javascript:, etc. morrem aqui.
+            if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+                return false;
+            }
+            // Hostname parseado, nunca includes() na string crua:
+            // https://evil.com/?x=imgur.com não passa (hostname = evil.com).
+            const host = parsed.hostname.toLowerCase().replace(/^www\./, '');
+            if (this.ALLOWED_IMAGE_HOSTS.some(h => host === h || host.endsWith('.' + h))) {
+                return true;
+            }
+            // Caminho principal do produto ("URL de qualquer imagem da web"):
+            // extensão de imagem no PATH do URL parseado. O vetor
+            // `a.jpg?x=" onerror="` morre aqui: a extensão é verificada no
+            // pathname, nunca na string crua com query.
+            return /\.(jpg|jpeg|png|gif|svg|webp|bmp|ico)$/i.test(parsed.pathname);
         } catch {
             return false;
         }

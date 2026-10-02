@@ -343,9 +343,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" defer></script>
 
+    <!-- Sanitização (P1): o vendor precisa carregar antes do módulo -->
+    <script src="js/vendor/dompurify.min.js" defer></script>
+    <script src="js/sanitize.js" defer></script>
+
     <script src="js/i18n.js" defer></script>
     <script src="js/storage.js" defer></script>
     <script src="js/themes.js" defer></script>
+    <script src="js/markdown-normalize.js" defer></script>
     <script src="js/preview.js" defer></script>
     <script src="js/find-replace.js" defer></script>
     <script src="js/stats.js" defer></script>

@@ -51,9 +51,42 @@ const Storage = {
     }
 };
 
+// P12 (security-2026-10-02c): o nome de projeto vira chave do objeto
+// `projects` e é gravado no localStorage. Chaves do protótipo
+// ('__proto__', 'constructor', 'prototype') resolvem para
+// Object.prototype em projects['nome'] — um importProject com
+// name:"__proto__" passava a validação e o saveProject setava
+// Object.prototype.updated/current antes do TypeError em .versions
+// abortar (poluição de protótipo). Rejeitadas na fronteira, junto do
+// charset/tamanho.
+const PROTOTYPE_KEY_RE = /^(?:__proto__|constructor|prototype)$/;
+
 const ProjectManager = {
     KEY: 'projects',
     MAX_VERSIONS: 20,
+    MAX_NAME_LENGTH: 100,
+
+    // Fronteira defensiva (P10/S3, princípio 14): nome de projeto entra por
+    // prompt() e por JSON importado (terceiros). O nome vira chave do
+    // localStorage e é renderizado no modal de projetos — não pode carregar
+    // delimitadores de HTML/atributo (< > " ' &) nem tamanho arbitrário.
+    sanitizeProjectName(name) {
+        if (typeof name !== 'string') return null;
+        const clean = name.replace(/[<>"'&]/g, '').trim();
+        if (!clean) return null;
+        if (PROTOTYPE_KEY_RE.test(clean)) return null; // P12 — round-trip do export
+        return clean.slice(0, this.MAX_NAME_LENGTH);
+    },
+
+    // O nome tem de já estar na forma que o produto aceita (round-trip do
+    // export). Sem "corrigir silenciosamente" o que veio de terceiros.
+    isValidProjectName(name) {
+        if (typeof name !== 'string') return false;
+        const trimmed = name.trim();
+        if (!trimmed || trimmed.length > this.MAX_NAME_LENGTH) return false;
+        if (PROTOTYPE_KEY_RE.test(trimmed)) return false; // P12
+        return !/[<>"'&]/.test(trimmed);
+    },
 
     getAll() {
         return Storage.load(this.KEY) || {};
@@ -65,6 +98,8 @@ const ProjectManager = {
     },
 
     saveProject(name, data) {
+        if (!this.isValidProjectName(name)) return false;
+        if (!data || typeof data !== 'object' || typeof data.markdown !== 'string') return false;
         const projects = this.getAll();
         const now = new Date().toISOString();
         if (!projects[name]) {
@@ -82,6 +117,7 @@ const ProjectManager = {
             projects[name].versions = projects[name].versions.slice(0, this.MAX_VERSIONS);
         }
         Storage.save(this.KEY, projects);
+        return true;
     },
 
     deleteProject(name) {
@@ -92,7 +128,7 @@ const ProjectManager = {
 
     renameProject(oldName, newName) {
         const projects = this.getAll();
-        if (projects[oldName]) {
+        if (projects[oldName] && this.isValidProjectName(newName)) {
             projects[newName] = projects[oldName];
             delete projects[oldName];
             Storage.save(this.KEY, projects);
@@ -118,14 +154,23 @@ const ProjectManager = {
         return JSON.stringify({ name, ...project }, null, 2);
     },
 
+    // P10/S3: JSON arbitrário (arquivo de terceiro) — valida estrutura antes
+    // de gravar. O formato real do produto é data.current = { markdown,
+    // themeId } (objeto, não string); o nome tem de ser a forma que o
+    // produto aceitaria (round-trip do export) — payload hostil é REJEITADO,
+    // não silenciosamente alterado.
     importProject(jsonString) {
         try {
             const data = JSON.parse(jsonString);
-            if (data.name && data.current) {
-                this.saveProject(data.name, data.current);
-                return true;
-            }
-            return false;
+            if (!data || typeof data !== 'object') return false;
+            if (typeof data.name !== 'string' || !this.isValidProjectName(data.name)) return false;
+            if (!data.current || typeof data.current !== 'object') return false;
+            if (typeof data.current.markdown !== 'string') return false;
+            if (data.current.themeId !== undefined && typeof data.current.themeId !== 'number') return false;
+            return this.saveProject(data.name, {
+                markdown: data.current.markdown,
+                themeId: data.current.themeId
+            });
         } catch (e) {
             return false;
         }

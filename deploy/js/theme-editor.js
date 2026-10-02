@@ -23,7 +23,7 @@ const ThemeEditor = {
                     <div class="theme-editor-controls">
                         <div class="form-group">
                             <label>Nome do Tema</label>
-                            <input type="text" id="te-name" value="${this.editingTheme.name}">
+                            <input type="text" id="te-name" value="${Sanitize.attr(this.editingTheme.name)}">
                         </div>
                         <div class="form-group">
                             <label>Grupo</label>
@@ -40,8 +40,8 @@ const ThemeEditor = {
                         <div class="form-group">
                             <label>Cor de Destaque</label>
                             <div class="color-input-group">
-                                <input type="color" id="te-color-picker" value="${this.editingTheme.color}">
-                                <input type="text" id="te-color" value="${this.editingTheme.color}">
+                                <input type="color" id="te-color-picker" value="${Sanitize.attr(this.editingTheme.color)}">
+                                <input type="text" id="te-color" value="${Sanitize.attr(this.editingTheme.color)}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -58,7 +58,7 @@ const ThemeEditor = {
                         </div>
                         <div class="form-group">
                             <label>CSS do Tema</label>
-                            <textarea id="te-css" rows="10" style="font-family: monospace; font-size: 0.85rem;">${this.editingTheme.css}</textarea>
+                            <textarea id="te-css" rows="10" style="font-family: monospace; font-size: 0.85rem;">${Sanitize.attr(this.editingTheme.css)}</textarea>
                         </div>
                     </div>
                     <div class="theme-preview-live" id="te-preview">

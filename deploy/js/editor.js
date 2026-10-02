@@ -37,7 +37,7 @@ const Editor = {
             case 'link': this.insertLink(); break;
             case 'table': this.insertTable(); break;
             case 'hr': this.insertAtCursor('\n---\n'); break;
-            case 'pagebreak': this.insertAtCursor('\n\n---\n\n'); break;
+            case 'pagebreak': this.insertAtCursor('\n\n\\pagebreak\n\n'); break;
             case 'footnote': this.insertFootnote(); break;
             case 'undo': this.undo(); break;
             case 'redo': this.redo(); break;
@@ -249,41 +249,88 @@ const Editor = {
                 <div class="form-group">
                     <input type="text" id="pm-search" placeholder="Buscar projetos...">
                 </div>
-                <ul class="project-list" id="pm-list">
-                    ${projects.length === 0 ? '<li style="text-align:center; color:#999; padding:20px;">Nenhum projeto salvo</li>' :
-                    projects.map(name => {
-                        const proj = ProjectManager.get(name);
-                        const date = proj.updated ? new Date(proj.updated).toLocaleDateString('pt-BR') : '';
-                        return `
-                        <li class="project-item" data-project="${name}">
-                            <div class="project-info">
-                                <div class="project-name">${name}</div>
-                                <div class="project-meta">${date} — ${proj.versions?.length || 0} versões</div>
-                            </div>
-                            <div class="project-actions">
-                                <button class="btn btn-sm btn-secondary pm-load" data-name="${name}" title="Carregar"><i class="fas fa-folder-open"></i></button>
-                                <button class="btn btn-sm btn-secondary pm-versions" data-name="${name}" title="Versões"><i class="fas fa-history"></i></button>
-                                <button class="btn btn-sm btn-danger pm-delete" data-name="${name}" title="Excluir"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </li>`;
-                    }).join('')}
-                </ul>
+                <ul class="project-list" id="pm-list"></ul>
             `,
             buttons: [
                 { text: I18n.t('close'), class: 'btn-secondary', action: 'close' }
             ]
         });
 
+        // P10/S2: a lista de projetos é montada via DOM (textContent +
+        // dataset), nunca por interpolação de ${name} em HTML — o nome pode
+        // vir de JSON importado (terceiros). data-project/data-name viram
+        // propriedades dataset; o <div> do nome vira textContent.
+        const listEl = modal.querySelector('#pm-list');
+        if (projects.length === 0) {
+            const li = document.createElement('li');
+            li.style.cssText = 'text-align:center; color:#999; padding:20px;';
+            li.textContent = 'Nenhum projeto salvo';
+            listEl.appendChild(li);
+        } else {
+            projects.forEach(name => {
+                const proj = ProjectManager.get(name);
+                const date = proj && proj.updated ? new Date(proj.updated).toLocaleDateString('pt-BR') : '';
+
+                const li = document.createElement('li');
+                li.className = 'project-item';
+                li.dataset.project = name;
+
+                const info = document.createElement('div');
+                info.className = 'project-info';
+
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'project-name';
+                nameDiv.textContent = name;
+
+                const metaDiv = document.createElement('div');
+                metaDiv.className = 'project-meta';
+                metaDiv.textContent = `${date} — ${(proj && proj.versions ? proj.versions.length : 0)} versões`;
+
+                info.appendChild(nameDiv);
+                info.appendChild(metaDiv);
+
+                const actions = document.createElement('div');
+                actions.className = 'project-actions';
+
+                const mkBtn = (btnClass, title, iconClass) => {
+                    const b = document.createElement('button');
+                    b.className = `btn btn-sm btn-${btnClass}`;
+                    b.dataset.name = name;
+                    b.title = title;
+                    const ic = document.createElement('i');
+                    ic.className = `fas fa-${iconClass}`;
+                    b.appendChild(ic);
+                    return b;
+                };
+                const loadBtn = mkBtn('secondary', 'Carregar', 'folder-open');
+                loadBtn.classList.add('pm-load');
+                const verBtn = mkBtn('secondary', 'Versões', 'history');
+                verBtn.classList.add('pm-versions');
+                const delBtn = mkBtn('danger', 'Excluir', 'trash');
+                delBtn.classList.add('pm-delete');
+                actions.appendChild(loadBtn);
+                actions.appendChild(verBtn);
+                actions.appendChild(delBtn);
+
+                li.appendChild(info);
+                li.appendChild(actions);
+                listEl.appendChild(li);
+            });
+        }
+
         // New project
         modal.querySelector('#pm-new')?.addEventListener('click', () => {
             const name = prompt('Nome do novo projeto:');
             if (name) {
-                ProjectManager.saveProject(name, {
+                if (ProjectManager.saveProject(name, {
                     markdown: App.dom.input.value,
                     themeId: App.currentIndex
-                });
-                ModalManager.close(modal);
-                App.showToast(`Projeto "${name}" salvo`, 'success');
+                })) {
+                    ModalManager.close(modal);
+                    App.showToast(`Projeto "${name}" salvo`, 'success');
+                } else {
+                    App.showToast('Nome de projeto inválido (evite < > " \' &)', 'error');
+                }
             }
         });
 
@@ -314,12 +361,16 @@ const Editor = {
         modal.querySelector('#pm-export-current')?.addEventListener('click', () => {
             const name = prompt('Nome para exportação:', 'Meu Projeto');
             if (name) {
-                const data = ProjectManager.exportProject(name) || JSON.stringify({
-                    name,
+                // O nome exportado tem de ser a forma que o import aceita
+                // (round-trip): sanitiza na fronteira em vez de gerar um
+                // JSON que o próprio produto rejeitaria.
+                const exportName = ProjectManager.sanitizeProjectName(name) || 'Projeto';
+                const data = ProjectManager.exportProject(exportName) || JSON.stringify({
+                    name: exportName,
                     current: { markdown: App.dom.input.value, themeId: App.currentIndex }
                 }, null, 2);
                 const blob = new Blob([data], { type: 'application/json' });
-                saveAs(blob, `${name}.json`);
+                saveAs(blob, `${exportName}.json`);
                 App.showToast('Projeto exportado', 'success');
             }
         });
