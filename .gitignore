@@ -25,6 +25,7 @@ build/
 test/.out-*.pdf
 test/.print-doc*.html
 test/__pycache__/
+.pytest_cache/
 
 # Editor/OS
 .vscode/

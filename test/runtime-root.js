@@ -10,12 +10,18 @@ const fs = require('fs');
 // e falha em vez de passar, o que e o modo de falha correto, mas trava o gate
 // no layout de producao.
 //
-// O marcador e um diretorio que contenha `index.html` e um subdiretorio `js/`:
-// so o runtime satisfaz os dois, nos dois layouts. Alem de subir a arvore,
-// cada nivel tambem e testado com `deploy/` — no repositorio publico o runtime
-// e irmao de `test/`, nao ancestral, entao subir sozinho nunca o encontraria.
+// O marcador e um diretorio que contenha o trio `index.html` + `sw.js` +
+// `js/`: so o runtime satisfaz os tres, nos dois layouts. Um ancestral com
+// `index.html` e `js/` por coincidencia (laco do QA)ja fez o marcador de dois
+// elementos escolher o caminho errado — o `sw.js` fecha o caso, porque nao ha
+// reasonavelmente um `sw.js` ao lado de um `index.html` que nao seja este
+// produto. Alem de subir a arvore, cada nivel tambem e testado com `deploy/`:
+// no repositorio publico o runtime e irmao de `test/`, nao ancestral, entao
+// subir sozinho nunca o encontraria.
 function isRuntime(dir) {
-    return fs.existsSync(path.join(dir, 'index.html')) && fs.existsSync(path.join(dir, 'js'));
+    return fs.existsSync(path.join(dir, 'index.html'))
+        && fs.existsSync(path.join(dir, 'sw.js'))
+        && fs.existsSync(path.join(dir, 'js', 'pdf-generator.js'));
 }
 
 function runtimeRoot(fromDir) {
