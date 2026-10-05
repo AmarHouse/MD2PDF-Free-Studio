@@ -32,3 +32,5 @@ test/__pycache__/
 *.log
 .DS_Store
 Thumbs.db
+# estado de sessao de browser nunca versionado (A1)
+browser-state-*.json
