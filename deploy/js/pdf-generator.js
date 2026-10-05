@@ -328,10 +328,10 @@ const PDFGenerator = {
                     ${watermarkCSS}
                     img { max-width: 100%; height: auto; }
                     h1 { break-before: page; }
-                    body > *:first-child,
-                    body > *:first-child h1 {
-                        break-before: auto !important;
-                    }
+                    /* Primeiro h1 em ordem de documento (marcado por
+                       processSpecialBlocks). Era "body > *:first-child",
+                       que isentava a subarvore inteira do primeiro bloco. */
+                    h1[data-first-heading] { break-before: auto; }
                     .page-break { break-after: page; }
                     h1, h2, h3 { break-after: avoid; }
                     blockquote, ul, ol, li, table, figure { break-inside: avoid; }

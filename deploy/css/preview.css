@@ -128,7 +128,7 @@
     min-height: 100vh;
     padding: 80px 60px;
     text-align: center;
-    page-break-after: always;
+    break-after: page;
     position: relative;
 }
 
@@ -202,7 +202,7 @@
 /* ===== TABLE OF CONTENTS ===== */
 .toc-container {
     padding: 50px 60px;
-    page-break-after: always;
+    break-after: page;
 }
 
 .toc-container h2 {
@@ -239,7 +239,7 @@
     padding: 200px 60px;
     font-style: italic;
     color: #666;
-    page-break-after: always;
+    break-after: page;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -251,7 +251,7 @@
     padding: 200px 80px 60px;
     font-style: italic;
     color: #555;
-    page-break-after: always;
+    break-after: page;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -261,7 +261,7 @@
     padding: 200px 60px;
     font-size: 0.9em;
     color: #666;
-    page-break-after: always;
+    break-after: page;
     display: flex;
     flex-direction: column;
     justify-content: center;

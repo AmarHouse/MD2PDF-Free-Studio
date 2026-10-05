@@ -342,6 +342,23 @@ const App = {
                 h1.setAttribute('data-chapter', 'true');
             }
         });
+        // Isenta da quebra de página o PRIMEIRO h1 em ordem de documento.
+        // A regra antiga era `h1:first-of-type`, que casa por IRMÃO e não por
+        // ordem do documento: qualquer h1 que fosse o primeiro dentro de um
+        // wrapper (<div class="part">, template, HTML bruto) recebia
+        // `break-before: auto` e perdia a quebra silenciosamente. Marcar o
+        // primeiro h1 em ordem de documento isenta exatamente um, e resiste a
+        // aninhamento. Não substitui `data-chapter`, que é heurístico por
+        // texto ("capitulo") e por isso não serve para decidir paginação.
+        if (h1s.length > 0) {
+            // limpa marcadores preexistentes antes de marcar: HTML bruto do
+            // usuario pode trazer data-first-heading num h1 proprio, e o
+            // Sanitize preserva data-*. Sem esta limpeza, dois h1 ficariam
+            // isentos e a invariante "exatamente um" seria do documento, nao
+            // do render. (achado R-01 do review-2026-10-05)
+            h1s.forEach(h => h.removeAttribute('data-first-heading'));
+            h1s[0].setAttribute('data-first-heading', 'true');
+        }
         const blockquotes = doc.querySelectorAll('blockquote');
         blockquotes.forEach(bq => {
             const text = bq.textContent;

@@ -224,7 +224,7 @@ const coverCSS = (accentColor) => `
         min-height: 100vh;
         padding: 80px 60px;
         text-align: center;
-        page-break-after: always;
+        break-after: page;
         position: relative;
     }
     .cover-block::before {
@@ -237,14 +237,14 @@ const coverCSS = (accentColor) => `
     .cover-block h1 {
         font-size: 3.2em;
         margin-bottom: 0.3em;
-        page-break-before: auto;
+        break-before: auto;
     }
     .cover-block h2 {
         font-size: 1.4em;
         color: #666;
         font-weight: 300;
         margin-bottom: 2em;
-        page-break-before: auto;
+        break-before: auto;
     }
 `;
 
@@ -253,13 +253,13 @@ const coverCSS = (accentColor) => `
  */
 const tocCSS = (accentColor) => `
     .toc-block {
-        page-break-after: always;
+        break-after: page;
         padding: 40px 0;
     }
     .toc-block h2 {
         text-align: center;
         margin-bottom: 2em;
-        page-break-before: auto;
+        break-before: auto;
     }
     .toc-block ol {
         list-style: none;
@@ -454,9 +454,12 @@ const pageBreakCSS = `
     h1 {
         break-before: page;
     }
-    body > *:first-child,
-    body > *:first-child h1 {
-        break-before: auto !important;
+    /* Isenta o primeiro h1 em ordem de documento. Substitui
+       "body > *:first-child, body > *:first-child h1", que isentava a subarvore
+       inteira do primeiro bloco — e portanto todos os capitulos de um wrapper
+       de primeira linha. O marcador vem de app.js processSpecialBlocks. */
+    h1[data-first-heading] {
+        break-before: auto;
     }
     h1, h2, h3, h4 {
         break-after: avoid;
@@ -3524,7 +3527,10 @@ const ThemeManager = {
             h1 {
                 break-before: page;
             }
-            h1:first-of-type {
+            /* Isenta o primeiro h1 em ordem de documento (marcado por
+               app.js processSpecialBlocks). ":first-of-type" casava por
+               irmão e perdia a quebra de um h1 aninhado em wrapper. */
+            h1[data-first-heading] {
                 break-before: auto;
             }
             h1, h2, h3, h4 {
@@ -3559,7 +3565,7 @@ const ThemeManager = {
                 object-fit: contain;
             }
             .cover-block {
-                page-break-after: always;
+                break-after: page;
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
@@ -3569,7 +3575,7 @@ const ThemeManager = {
                 padding: 80px 60px;
             }
             .toc-block {
-                page-break-after: always;
+                break-after: page;
             }
             a {
                 color: #333 !important;
