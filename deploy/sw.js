@@ -2,7 +2,12 @@
    SW.JS - Service Worker com Cache Inteligente
    ============================================ */
 
-const CACHE_VERSION = 'v4';
+// ATENÇÃO: este valor precisa ser elevado a cada release que muda qualquer
+// arquivo de runtime. O fetch do sw é cache-first e compara bytes: se o sw.js
+// não mudar, o navegador não reinstala, o precache não é refeito e usuários com
+// a versão anterior em cache continuam recebendo os assets antigos indefinidamente.
+// Sintoma: "site não atualiza após release" (RUNBOOK §Incidentes, P6).
+const CACHE_VERSION = 'v5';
 const CACHE_NAME = `md2pdf-${CACHE_VERSION}`;
 const CACHE_CDN = `md2pdf-cdn-${CACHE_VERSION}`;
 
